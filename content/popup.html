@@ -1,0 +1,49 @@
+<!doctype html>
+<!--
+ This page is shown when the extension button is clicked, because the
+ "browser_action" field in manifest.json contains the "default_popup" key with
+ value "popup.html".
+ -->
+<html>
+<head>
+  <title>Downloader</title>
+  <style>
+    body {
+      background-color: lightgray;
+      font-family: "Segoe UI", "Lucida Grande", Tahoma, sans-serif;
+      font-size: 100%;
+    }
+  </style>
+  <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="../js/popup.js"></script>
+
+</head>
+<body>
+<div>
+  Kuaishou Profile URL:<input type="text" name="fname" placeholder="Insert profile URL" id="profileUrl">
+</div>
+<p>To select a folder and disable the save as dialog: settings > search for "Ask where to save each file before downloading" > Click on "change" to choose download folder and make sure the switcher is disabled.</p>
+<p>Don't forget to turn the switcher back on when you're done. Otherwise files will be saved in the same folder.</p>
+
+<div style="padding-top: 20px">
+  <label>
+    Date > From:
+    <input type="date" id="dateStart" />
+  </label><br />
+  <label>
+    Date > End:
+    <input type="date" id="dateEnd" />
+  </label>
+
+</div>
+
+<div style="padding-top: 20px;">
+  <button type="button" id="downloadBtn">Start</button>
+</div>
+<div style="padding-top: 20px; display: none" id="download_div">
+  <button type="button" id="downloadVideos">Press to start downloading</button>
+
+</div>
+
+</body>
+</html>
