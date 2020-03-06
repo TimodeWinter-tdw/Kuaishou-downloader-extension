@@ -178,7 +178,7 @@ async function getVideoURL(index) {
                 let url = document.getElementsByTagName("video")[0].currentSrc;
                 // Close the card again
                 $(".close").fclick();
-                sleep(2000);
+                await sleep(2000);
                 return url;
             }else {
                 console.log("The video URL for index " + index + " was undefined.");
