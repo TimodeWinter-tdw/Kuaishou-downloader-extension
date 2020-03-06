@@ -86,7 +86,7 @@ for(let i = 0; i < videoList.length; i++) {
     }else if(days[1] !== undefined) {
 
         // Calculate the difference in time
-        let diff1 = dayDiff(new Date(), new Date(startdate));
+        let diff1 = dayDiff(new Date(), new Date(startDate));
         let diff2 = dayDiff(new Date(), new Date(endDate));
 
         // Check if the video is in the timeframe and should be downloaded or not
@@ -104,7 +104,7 @@ for(let i = 0; i < videoList.length; i++) {
     }else if(weeks[1] !== undefined) {
 
         // Calculate the difference in time
-        let diff1 = weekDiff(new Date(), new Date(startdate));
+        let diff1 = weekDiff(new Date(), new Date(startDate));
         let diff2 = weekDiff(new Date(), new Date(endDate));
 
         // Check if the video is in the timeframe and should be downloaded or not
@@ -122,7 +122,7 @@ for(let i = 0; i < videoList.length; i++) {
     }else if(months[1] !== undefined) {
 
         // Calculate the difference in time
-        let diff1 = monthDiff(new Date(), new Date(startdate));
+        let diff1 = monthDiff(new Date(), new Date(startDate));
         let diff2 = monthDiff(new Date(), new Date(endDate));
 
         // Check if the video is in the timeframe and should be downloaded or not
@@ -140,7 +140,7 @@ for(let i = 0; i < videoList.length; i++) {
     }else if(years[1] !== undefined) {
 
         // Calculate the difference in time
-        let diff1 = yearDiff(new Date(), new Date(startdate));
+        let diff1 = yearDiff(new Date(), new Date(startDate));
         let diff2 = yearDiff(new Date(), new Date(endDate));
 
         // Check if the video is in the timeframe and should be downloaded or not
