@@ -171,7 +171,16 @@ function checkIsInTimeFrame(siteValue, diff1, diff2) {
 function getVideoURL(index) {
     // Now get the elements by classname
     if(document.getElementsByClassName("feed-list-item")[0]) {
-        $(".work-card-thumbnail").eq(index).fclick();
+        console.log("Start click event.");
+        let workCardThumbnail = $(".work-card-thumbnail");
+        if(workCardThumbnail !== undefined) {
+            console.log("Work card thumbnail was found.");
+        }else {
+            console.log("Work card thumbnail was not found.");
+        }
+
+        workCardThumbnail.eq(index).fclick();
+
         try {
             // First sleep for 5 seconds so the video can load
             sleep(5000);
