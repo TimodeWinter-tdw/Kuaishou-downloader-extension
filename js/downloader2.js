@@ -131,7 +131,9 @@ for(let i = 0; i < videoList.length; i++) {
 
         // Check if the video is in the timeframe and should be downloaded or not
         if(checkIsInTimeFrame(months[0], diff1, diff2)) {
-            // Video falls within the provided timeframe so it should be downloaded
+            // First click on the card to show the video
+            $(".work-card-thumbnail").eq(i).fclick();
+
             let videoURL = getVideoURL(i);
             console.log("Video URL for index " + i + " is: " + videoURL);
 
@@ -169,9 +171,6 @@ function checkIsInTimeFrame(siteValue, diff1, diff2) {
 }
 
 function getVideoURL(index) {
-    // First click on the card to show the video
-    $(".work-card-thumbnail").eq(index).fclick();
-
     // Now get the elements by classname
     if(document.getElementsByClassName("feed-list-item")[0]) {
         try {
