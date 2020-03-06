@@ -78,14 +78,14 @@ for(let i = 0; i < videoList.length; i++) {
         // Check if the video is in the timeframe and should be downloaded or not
         if(checkIsInTimeFrame(hours[0], diff1, diff2)) {
             // First click on the card to show the video
-            $(".work-card-thumbnail").eq(i).fclick();
+            if($(".work-card-thumbnail").eq(i).fclick()) {
+                // Video falls within the provided timeframe so it should be downloaded
+                let videoURL = getVideoURL(i);
+                console.log("Video URL for index " + i + " is: " + videoURL);
 
-            // Video falls within the provided timeframe so it should be downloaded
-            let videoURL = getVideoURL(i);
-            console.log("Video URL for index " + i + " is: " + videoURL);
-
-            // Start the download
-            download(i, videoURL);
+                // Start the download
+                download(i, videoURL);
+            }
         }else {
             console.log("Video with index " + i + " does not fall within provided timeframe so it should not be downloaded.");
         }
@@ -99,14 +99,14 @@ for(let i = 0; i < videoList.length; i++) {
         // Check if the video is in the timeframe and should be downloaded or not
         if(checkIsInTimeFrame(days[0], diff1, diff2)) {
             // First click on the card to show the video
-            $(".work-card-thumbnail").eq(i).fclick();
+            if($(".work-card-thumbnail").eq(i).fclick()) {
+                // Video falls within the provided timeframe so it should be downloaded
+                let videoURL = getVideoURL(i);
+                console.log("Video URL for index " + i + " is: " + videoURL);
 
-            // Video falls within the provided timeframe so it should be downloaded
-            let videoURL = getVideoURL(i);
-            console.log("Video URL for index " + i + " is: " + videoURL);
-
-            // Start the download
-            download(i, videoURL);
+                // Start the download
+                download(i, videoURL);
+            }
         }else {
             console.log("Video with index " + i + " does not fall within provided timeframe so it should not be downloaded.");
         }
@@ -120,14 +120,14 @@ for(let i = 0; i < videoList.length; i++) {
         // Check if the video is in the timeframe and should be downloaded or not
         if(checkIsInTimeFrame(weeks[0], diff1, diff2)) {
             // First click on the card to show the video
-            $(".work-card-thumbnail").eq(i).fclick();
+            if($(".work-card-thumbnail").eq(i).fclick()) {
+                // Video falls within the provided timeframe so it should be downloaded
+                let videoURL = getVideoURL(i);
+                console.log("Video URL for index " + i + " is: " + videoURL);
 
-            // Video falls within the provided timeframe so it should be downloaded
-            let videoURL = getVideoURL(i);
-            console.log("Video URL for index " + i + " is: " + videoURL);
-
-            // Start the download
-            download(i, videoURL);
+                // Start the download
+                download(i, videoURL);
+            }
         }else {
             console.log("Video with index " + i + " does not fall within provided timeframe so it should not be downloaded.");
         }
@@ -141,13 +141,14 @@ for(let i = 0; i < videoList.length; i++) {
         // Check if the video is in the timeframe and should be downloaded or not
         if(checkIsInTimeFrame(months[0], diff1, diff2)) {
             // First click on the card to show the video
-            $(".work-card-thumbnail").eq(i).fclick();
+            if($(".work-card-thumbnail").eq(i).fclick()) {
+                // Video falls within the provided timeframe so it should be downloaded
+                let videoURL = getVideoURL(i);
+                console.log("Video URL for index " + i + " is: " + videoURL);
 
-            let videoURL = getVideoURL(i);
-            console.log("Video URL for index " + i + " is: " + videoURL);
-
-            // Start the download
-            download(i, videoURL);
+                // Start the download
+                download(i, videoURL);
+            }
         }else {
             console.log("Video with index " + i + " does not fall within provided timeframe so it should not be downloaded.");
         }
@@ -159,16 +160,16 @@ for(let i = 0; i < videoList.length; i++) {
         let diff2 = yearDiff(new Date(), new Date(endDate));
 
         // Check if the video is in the timeframe and should be downloaded or not
-        if(checkIsInTimeFrame(weeks[0], diff1, diff2)) {
+        if(checkIsInTimeFrame(years[0], diff1, diff2)) {
             // First click on the card to show the video
-            $(".work-card-thumbnail").eq(i).fclick();
+            if($(".work-card-thumbnail").eq(i).fclick()) {
+                // Video falls within the provided timeframe so it should be downloaded
+                let videoURL = getVideoURL(i);
+                console.log("Video URL for index " + i + " is: " + videoURL);
 
-            // Video falls within the provided timeframe so it should be downloaded
-            let videoURL = getVideoURL(i);
-            console.log("Video URL for index " + i + " is: " + videoURL);
-
-            // Start the download
-            download(i, videoURL);
+                // Start the download
+                download(i, videoURL);
+            }
         }else {
             console.log("Video with index " + i + " does not fall within provided timeframe so it should not be downloaded.");
         }
