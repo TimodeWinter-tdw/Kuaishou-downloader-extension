@@ -66,10 +66,9 @@ for(let i = 0; i < videoList.length; i++) {
     let years = video_uploaded_on.split("年前");
 
     // Now check if the video was uploaded hours, days, weeks, months or years ago
-    let uploadTimeType = null;
     if(hours[1] !== undefined) {
         // Calculate the difference in time
-        let diff1 = hourDiff(new Date(), new Date(startdate));
+        let diff1 = hourDiff(new Date(), new Date(startDate));
         let diff2 = hourDiff(new Date(), new Date(endDate));
 
         // Check if the video is in the timeframe and should be downloaded or not
