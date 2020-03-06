@@ -168,7 +168,7 @@ function checkIsInTimeFrame(siteValue, diff1, diff2) {
     return siteValue <= diff1 && siteValue >= diff2;
 }
 
-async function getVideoURL(index) {
+function getVideoURL(index) {
     // First click on the card to show the video
     $(".work-card-thumbnail").eq(index).fclick();
 
@@ -176,13 +176,13 @@ async function getVideoURL(index) {
     if(document.getElementsByClassName("feed-list-item")[0]) {
         try {
             // First sleep for 5 seconds so the video can load
-            await sleep(5000);
+            sleep(5000);
             // Now try to get the URL
             if(document.getElementsByTagName("video")[0].currentSrc !== undefined) {
                 let url = document.getElementsByTagName("video")[0].currentSrc;
                 // Close the card again
                 $(".close").fclick();
-                await sleep(2000);
+                sleep(2000);
                 return url;
             }else {
                 console.log("The video URL for index " + index + " was undefined.");
