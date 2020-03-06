@@ -260,7 +260,7 @@ var interval1= setInterval(()=>{
 
 function download(index, url) {
     // First create the new filename for the video
-    let newFileName = index + new Date().getTime() + "_property-of-Pusic-Entertainment.mp4";
+    let newFileName = index + "___" + new Date().getTime() + "_property-of-Pusic-Entertainment.mp4";
     console.log("Download filename for video " + index + " is " + newFileName);
 
     // Now start the download
