@@ -93,7 +93,7 @@ var interval1= setInterval(()=>{
                             chrome.runtime.sendMessage({url: videoTag, filename: filename}, function(response) {
                                 console.log(response.message);
                             });
-                        }, 1000);
+                        }, 5000);
                     }catch (e) {
                         console.log("Caught: "+e);
                     }
@@ -121,7 +121,7 @@ var interval1= setInterval(()=>{
                             chrome.runtime.sendMessage({url: videoTag, filename: filename}, function(response) {
                                 console.log(response.message);
                             });
-                        }, 1000);
+                        }, 5000);
                     }catch (e) {
                         console.log("Caught: "+e);
                     }
@@ -149,7 +149,7 @@ var interval1= setInterval(()=>{
                             chrome.runtime.sendMessage({url: videoTag, filename: filename}, function(response) {
                                 console.log(response.message);
                             });
-                        }, 1000);
+                        }, 5000);
                     }catch (e) {
                         console.log("Caught: "+e);
                     }
@@ -172,7 +172,7 @@ var interval1= setInterval(()=>{
                             chrome.runtime.sendMessage({url: videoTag, filename: filename}, function(response) {
                                 console.log(response.message);
                             });
-                        }, 1000);
+                        }, 5000);
                     }catch (e) {
                         console.log("Caught: "+e);
                     }
@@ -195,7 +195,7 @@ var interval1= setInterval(()=>{
                             chrome.runtime.sendMessage({url: videoTag, filename: filename}, function(response) {
                                 console.log(response.message);
                             });
-                        }, 1000);
+                        }, 5000);
                     }catch (e) {
                         console.log("Caught: "+e);
                     }
@@ -213,5 +213,5 @@ var interval1= setInterval(()=>{
         console.log("index end: "+index);
 
 
-    }, 1000);
-},5500);
+    }, 200);
+},10000);

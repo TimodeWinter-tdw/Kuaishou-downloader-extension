@@ -3,7 +3,7 @@
   
     "name": "Kuaishou downloader by 20423",
     "description": "Use this extension to download kuaishou videos. Extension made by 20423.",
-    "version": "2.0",
+    "version": "2.0.1",
   
     "browser_action": {
       "default_icon": "icons/icon.png",
