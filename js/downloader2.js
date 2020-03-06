@@ -55,6 +55,10 @@ function onFailed(error) {
     console.log(`Download failed: ${error}`);
 }
 
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 var interval1= setInterval(()=>{
     setTimeout(function() {
 
@@ -93,12 +97,17 @@ var interval1= setInterval(()=>{
                     try {
                         console.log("try catch started for video " + index);
 
-                        // Now get the video URL
-                        let videoURL = document.getElementsByTagName("video")[0].currentSrc;
-                        console.log("Got the video URL for video " + index + ". The url is: " + videoURL);
+                        downloadAfterSeconds();
 
-                        // Now start the download
-                        download(index, videoURL);
+                        async function downloadAfterSeconds() {
+                            await sleep(5000);
+                            // Now get the video URL
+                            let videoURL = document.getElementsByTagName("video")[0].currentSrc;
+                            console.log("Got the video URL for video " + index + ". The url is: " + videoURL);
+                            // Now start the download
+                            download(index, videoURL);
+                        }
+
                     }catch (e) {
                         console.log("Caught: "+e);
                     }
@@ -124,12 +133,17 @@ var interval1= setInterval(()=>{
                     try {
                         console.log("try catch started for video " + index);
 
-                        // Now get the video URL
-                        let videoURL = document.getElementsByTagName("video")[0].currentSrc;
-                        console.log("Got the video URL for video " + index + ". The url is: " + videoURL);
+                        downloadAfterSeconds();
 
-                        // Now start the download
-                        download(index, videoURL);
+                        async function downloadAfterSeconds() {
+                            await sleep(5000);
+                            // Now get the video URL
+                            let videoURL = document.getElementsByTagName("video")[0].currentSrc;
+                            console.log("Got the video URL for video " + index + ". The url is: " + videoURL);
+                            // Now start the download
+                            download(index, videoURL);
+                        }
+
                     }catch (e) {
                         console.log("Caught: "+e);
                     }
@@ -154,12 +168,16 @@ var interval1= setInterval(()=>{
                     try {
                         console.log("try catch started for video " + index);
 
-                        // Now get the video URL
-                        let videoURL = document.getElementsByTagName("video")[0].currentSrc;
-                        console.log("Got the video URL for video " + index + ". The url is: " + videoURL);
+                        downloadAfterSeconds();
 
-                        // Now start the download
-                        download(index, videoURL);
+                        async function downloadAfterSeconds() {
+                            await sleep(5000);
+                            // Now get the video URL
+                            let videoURL = document.getElementsByTagName("video")[0].currentSrc;
+                            console.log("Got the video URL for video " + index + ". The url is: " + videoURL);
+                            // Now start the download
+                            download(index, videoURL);
+                        }
                     }catch (e) {
                         console.log("Caught: "+e);
                     }
@@ -180,12 +198,16 @@ var interval1= setInterval(()=>{
                     try {
                         console.log("try catch started for video " + index);
 
-                        // Now get the video URL
-                        let videoURL = document.getElementsByTagName("video")[0].currentSrc;
-                        console.log("Got the video URL for video " + index + ". The url is: " + videoURL);
+                        downloadAfterSeconds();
 
-                        // Now start the download
-                        download(index, videoURL);
+                        async function downloadAfterSeconds() {
+                            await sleep(5000);
+                            // Now get the video URL
+                            let videoURL = document.getElementsByTagName("video")[0].currentSrc;
+                            console.log("Got the video URL for video " + index + ". The url is: " + videoURL);
+                            // Now start the download
+                            download(index, videoURL);
+                        }
                     }catch (e) {
                         console.log("Caught: "+e);
                     }
@@ -206,12 +228,16 @@ var interval1= setInterval(()=>{
                     try {
                         console.log("try catch started for video " + index);
 
-                        // Now get the video URL
-                        let videoURL = document.getElementsByTagName("video")[0].currentSrc;
-                        console.log("Got the video URL for video " + index + ". The url is: " + videoURL);
+                        downloadAfterSeconds();
 
-                        // Now start the download
-                        download(index, videoURL);
+                        async function downloadAfterSeconds() {
+                            await sleep(5000);
+                            // Now get the video URL
+                            let videoURL = document.getElementsByTagName("video")[0].currentSrc;
+                            console.log("Got the video URL for video " + index + ". The url is: " + videoURL);
+                            // Now start the download
+                            download(index, videoURL);
+                        }
                     }catch (e) {
                         console.log("Caught: "+e);
                     }
@@ -230,7 +256,7 @@ var interval1= setInterval(()=>{
 
 
     }, 200);
-},10000);
+},15000);
 
 function download(index, url) {
     // First create the new filename for the video
