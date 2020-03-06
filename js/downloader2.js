@@ -42,8 +42,12 @@ function yearDiff(date1, date2) {
     return date1.getFullYear() - date2.getFullYear();
 }
 
-function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
+function sleep(milliseconds) {
+    const date = Date.now();
+    let currentDate = null;
+    do {
+        currentDate = Date.now();
+    } while (currentDate - date < milliseconds);
 }
 
 // Prepare necessary information
