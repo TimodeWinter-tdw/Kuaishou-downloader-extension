@@ -58,10 +58,11 @@ function onFailed(error) {
 var interval1= setInterval(()=>{
     setTimeout(function() {
 
-        console.log("index start: "+index);
+        console.log("Start for video: " + index);
 
         // Text on how long ago video was uploaded e.g. 4 hours ago
         var video_uploaded_on = $(".work-card-info-time").eq(index).text();
+        console.log("Video " + index + " was uploaded on " + video_uploaded_on);
 
         // The number and the chinese text should be separated
         // This creates an array --> if the video was uploaded hours ago then var hours will be the only variable that has a second (1) array item.
@@ -81,24 +82,29 @@ var interval1= setInterval(()=>{
             var diffNowAndEndHours = hourDiff(new Date(), new Date(endDate));
             // If the hours given by kuaishou fall within the timeframe then download the video
             if(hours[0] <= diffNowAndStartHours && hours[0] >= diffNowAndEndHours) {
-                $(".work-card-thumbnail").eq(index).fclick();
-                if(document.getElementsByClassName("feed-list-item")[0]) {
-                    try {
-                        // Use delay so video can load
-                        setTimeout(function() {
-                            var videoTag = document.getElementsByTagName("video")[0].currentSrc;
-                            console.log(videoTag);
-                            var filename = index + "___" + new Date().getTime() + ".mp4";
 
-                            chrome.runtime.sendMessage({url: videoTag, filename: filename}, function(response) {
-                                console.log(response.message);
-                            });
-                        }, 5000);
+                console.log("Video " + index + " was uploaded hours ago.");
+
+                $(".work-card-thumbnail").eq(index).fclick();
+                console.log("Clicked on the thumbnail for video " + index);
+
+                if(document.getElementsByClassName("feed-list-item")[0]) {
+                    console.log("feed-list-items were gathered for video " + index);
+                    try {
+                        console.log("try catch started for video " + index);
+
+                        // Now get the video URL
+                        let videoURL = document.getElementsByTagName("video")[0].currentSrc;
+                        console.log("Got the video URL for video " + index + ". The url is: " + videoURL);
+
+                        // Now start the download
+                        download(index, videoURL);
                     }catch (e) {
                         console.log("Caught: "+e);
                     }
                 }
                 $(".close").fclick();
+
             }
         }else if(days[1] !== undefined) {
             // Now check if the amount of days ago is within the given timeframe
@@ -108,20 +114,22 @@ var interval1= setInterval(()=>{
             var diffNowAndEndDays = dayDiff(new Date(), new Date(endDate));
             // If the days given by kuaishou fall within the timeframe then download the video
             if(days[0] <= diffNowAndStartDays && days[0] >= diffNowAndEndDays) {
-                $(".work-card-thumbnail").eq(index).fclick();
-                if(document.getElementsByClassName("feed-list-item")[0]) {
-                    try {
-                        console.log("Trying...");
-                        // Use delay so video can load
-                        setTimeout(function() {
-                            var videoTag = document.getElementsByTagName("video")[0].currentSrc;
-                            console.log(videoTag);
-                            var filename = index + "___" + new Date().getTime() + ".mp4";
+                console.log("Video " + index + " was uploaded hours ago.");
 
-                            chrome.runtime.sendMessage({url: videoTag, filename: filename}, function(response) {
-                                console.log(response.message);
-                            });
-                        }, 5000);
+                $(".work-card-thumbnail").eq(index).fclick();
+                console.log("Clicked on the thumbnail for video " + index);
+
+                if(document.getElementsByClassName("feed-list-item")[0]) {
+                    console.log("feed-list-items were gathered for video " + index);
+                    try {
+                        console.log("try catch started for video " + index);
+
+                        // Now get the video URL
+                        let videoURL = document.getElementsByTagName("video")[0].currentSrc;
+                        console.log("Got the video URL for video " + index + ". The url is: " + videoURL);
+
+                        // Now start the download
+                        download(index, videoURL);
                     }catch (e) {
                         console.log("Caught: "+e);
                     }
@@ -136,20 +144,22 @@ var interval1= setInterval(()=>{
             var diffNowAndEndWeeks = weekDiff(new Date(), new Date(endDate));
             // If the weeks given by kuaishou fall within the timeframe then download the video
             if(weeks[0] <= diffNowAndStartWeeks && weeks[0] >= diffNowAndEndWeeks) {
-                $(".work-card-thumbnail").eq(index).fclick();
-                if(document.getElementsByClassName("feed-list-item")[0]) {
-                    try {
-                        console.log("Trying...");
-                        // Use delay so video can load
-                        setTimeout(function() {
-                            var videoTag = document.getElementsByTagName("video")[0].currentSrc;
-                            console.log(videoTag);
-                            var filename = index + "___" + new Date().getTime() + ".mp4";
+                console.log("Video " + index + " was uploaded hours ago.");
 
-                            chrome.runtime.sendMessage({url: videoTag, filename: filename}, function(response) {
-                                console.log(response.message);
-                            });
-                        }, 5000);
+                $(".work-card-thumbnail").eq(index).fclick();
+                console.log("Clicked on the thumbnail for video " + index);
+
+                if(document.getElementsByClassName("feed-list-item")[0]) {
+                    console.log("feed-list-items were gathered for video " + index);
+                    try {
+                        console.log("try catch started for video " + index);
+
+                        // Now get the video URL
+                        let videoURL = document.getElementsByTagName("video")[0].currentSrc;
+                        console.log("Got the video URL for video " + index + ". The url is: " + videoURL);
+
+                        // Now start the download
+                        download(index, videoURL);
                     }catch (e) {
                         console.log("Caught: "+e);
                     }
@@ -160,19 +170,22 @@ var interval1= setInterval(()=>{
             var diffNowAndStartMonths = monthDiff(new Date(), new Date(startDate));
             var diffNowAndEndMonths = monthDiff(new Date(), new Date(endDate));
             if(months[0] <= diffNowAndStartMonths && months[0] >= diffNowAndEndMonths) {
-                $(".work-card-thumbnail").eq(index).fclick();
-                if(document.getElementsByClassName("feed-list-item")[0]) {
-                    try {
-                        // Use delay so video can load
-                        setTimeout(function() {
-                            var videoTag = document.getElementsByTagName("video")[0].currentSrc;
-                            console.log(videoTag);
-                            var filename = index + "___" + new Date().getTime() + ".mp4";
+                console.log("Video " + index + " was uploaded hours ago.");
 
-                            chrome.runtime.sendMessage({url: videoTag, filename: filename}, function(response) {
-                                console.log(response.message);
-                            });
-                        }, 5000);
+                $(".work-card-thumbnail").eq(index).fclick();
+                console.log("Clicked on the thumbnail for video " + index);
+
+                if(document.getElementsByClassName("feed-list-item")[0]) {
+                    console.log("feed-list-items were gathered for video " + index);
+                    try {
+                        console.log("try catch started for video " + index);
+
+                        // Now get the video URL
+                        let videoURL = document.getElementsByTagName("video")[0].currentSrc;
+                        console.log("Got the video URL for video " + index + ". The url is: " + videoURL);
+
+                        // Now start the download
+                        download(index, videoURL);
                     }catch (e) {
                         console.log("Caught: "+e);
                     }
@@ -183,19 +196,22 @@ var interval1= setInterval(()=>{
             var diffNowAndStartYears = yearDiff(new Date(), new Date(startDate));
             var diffNowAndEndYears = yearDiff(new Date(), new Date(endDate));
             if(years[0] <= diffNowAndStartYears && years[0] >= diffNowAndEndYears) {
-                $(".work-card-thumbnail").eq(index).fclick();
-                if(document.getElementsByClassName("feed-list-item")[0]) {
-                    try {
-                        // Use delay so video can load
-                        setTimeout(function() {
-                            var videoTag = document.getElementsByTagName("video")[0].currentSrc;
-                            console.log(videoTag);
-                            var filename = index + "___" + new Date().getTime() + ".mp4";
+                console.log("Video " + index + " was uploaded hours ago.");
 
-                            chrome.runtime.sendMessage({url: videoTag, filename: filename}, function(response) {
-                                console.log(response.message);
-                            });
-                        }, 5000);
+                $(".work-card-thumbnail").eq(index).fclick();
+                console.log("Clicked on the thumbnail for video " + index);
+
+                if(document.getElementsByClassName("feed-list-item")[0]) {
+                    console.log("feed-list-items were gathered for video " + index);
+                    try {
+                        console.log("try catch started for video " + index);
+
+                        // Now get the video URL
+                        let videoURL = document.getElementsByTagName("video")[0].currentSrc;
+                        console.log("Got the video URL for video " + index + ". The url is: " + videoURL);
+
+                        // Now start the download
+                        download(index, videoURL);
                     }catch (e) {
                         console.log("Caught: "+e);
                     }
@@ -215,3 +231,14 @@ var interval1= setInterval(()=>{
 
     }, 200);
 },10000);
+
+function download(index, url) {
+    // First create the new filename for the video
+    let newFileName = index + new Date().getTime() + "_property-of-Pusic-Entertainment.mp4";
+    console.log("Download filename for video " + index + " is " + newFileName);
+
+    // Now start the download
+    chrome.runtime.sendMessage({url: url, filename: newFileName}, function(response) {
+        console.log("response for video " + index + " is " + response.message);
+    });
+}
