@@ -1,3 +1,6 @@
+var video = document.getElementsByClassName('work-card-thumbnail');
+var index = 0;
+
 fireEvent = function (element, event) {
     if (document.createEventObject) {
         var evt = document.createEventObject();
@@ -42,171 +45,171 @@ function yearDiff(date1, date2) {
     return date1.getFullYear() - date2.getFullYear();
 }
 
-function sleep(milliseconds) {
-    const date = Date.now();
-    let currentDate = null;
-    do {
-        currentDate = Date.now();
-    } while (currentDate - date < milliseconds);
+function onStartedDownload(id) {
+    console.log(`Started downloading: ${id}`);
 }
 
-// Prepare necessary information
-const videoList = document.getElementsByClassName('work-card-thumbnail');
-
-// Loop through all the videos
-for(let i = 0; i < videoList.length; i++) {
-    console.log("Iteration for video with index " + i + " started.");
-
-    // First get the text value for how long ago the video was uploaded
-    let video_uploaded_on = $(".work-card-info-time").eq(i).text();
-
-    // The number and the chinese text should be separated
-    // This creates an array --> if the video was uploaded hours ago then var hours will be the only variable that has a second (1) array item.
-    // The amount of items can be used to check how long ago the video was uploaded (e.g. hours, days, months)
-    let hours = video_uploaded_on.split("小时前");
-    let days = video_uploaded_on.split("天前");
-    let weeks = video_uploaded_on.split("周前");
-    let months = video_uploaded_on.split("月前");
-    let years = video_uploaded_on.split("年前");
-
-    // Now check if the video was uploaded hours, days, weeks, months or years ago
-    if(hours[1] !== undefined) {
-        // Calculate the difference in time
-        let diff1 = hourDiff(new Date(), new Date(startDate));
-        let diff2 = hourDiff(new Date(), new Date(endDate));
-
-        // Check if the video is in the timeframe and should be downloaded or not
-        if(checkIsInTimeFrame(hours[0], diff1, diff2)) {
-            // Video falls within the provided timeframe so it should be downloaded
-            let videoURL = getVideoURL(i);
-            console.log("Video URL for index " + i + " is: " + videoURL);
-
-            // Start the download
-            download(i, videoURL);
-        }else {
-            console.log("Video with index " + i + " does not fall within provided timeframe so it should not be downloaded.");
-        }
-
-    }else if(days[1] !== undefined) {
-
-        // Calculate the difference in time
-        let diff1 = dayDiff(new Date(), new Date(startDate));
-        let diff2 = dayDiff(new Date(), new Date(endDate));
-
-        // Check if the video is in the timeframe and should be downloaded or not
-        if(checkIsInTimeFrame(days[0], diff1, diff2)) {
-            // Video falls within the provided timeframe so it should be downloaded
-            let videoURL = getVideoURL(i);
-            console.log("Video URL for index " + i + " is: " + videoURL);
-
-            // Start the download
-            download(i, videoURL);
-        }else {
-            console.log("Video with index " + i + " does not fall within provided timeframe so it should not be downloaded.");
-        }
-
-    }else if(weeks[1] !== undefined) {
-
-        // Calculate the difference in time
-        let diff1 = weekDiff(new Date(), new Date(startDate));
-        let diff2 = weekDiff(new Date(), new Date(endDate));
-
-        // Check if the video is in the timeframe and should be downloaded or not
-        if(checkIsInTimeFrame(weeks[0], diff1, diff2)) {
-            // Video falls within the provided timeframe so it should be downloaded
-            let videoURL = getVideoURL(i);
-            console.log("Video URL for index " + i + " is: " + videoURL);
-
-            // Start the download
-            download(i, videoURL);
-        }else {
-            console.log("Video with index " + i + " does not fall within provided timeframe so it should not be downloaded.");
-        }
-
-    }else if(months[1] !== undefined) {
-
-        // Calculate the difference in time
-        let diff1 = monthDiff(new Date(), new Date(startDate));
-        let diff2 = monthDiff(new Date(), new Date(endDate));
-
-        // Check if the video is in the timeframe and should be downloaded or not
-        if(checkIsInTimeFrame(months[0], diff1, diff2)) {
-            // Video falls within the provided timeframe so it should be downloaded
-            let videoURL = getVideoURL(i);
-            console.log("Video URL for index " + i + " is: " + videoURL);
-
-            // Start the download
-            download(i, videoURL);
-        }else {
-            console.log("Video with index " + i + " does not fall within provided timeframe so it should not be downloaded.");
-        }
-
-    }else if(years[1] !== undefined) {
-
-        // Calculate the difference in time
-        let diff1 = yearDiff(new Date(), new Date(startDate));
-        let diff2 = yearDiff(new Date(), new Date(endDate));
-
-        // Check if the video is in the timeframe and should be downloaded or not
-        if(checkIsInTimeFrame(years[0], diff1, diff2)) {
-            // Video falls within the provided timeframe so it should be downloaded
-            let videoURL = getVideoURL(i);
-            console.log("Video URL for index " + i + " is: " + videoURL);
-
-            // Start the download
-            download(i, videoURL);
-        }else {
-            console.log("Video with index " + i + " does not fall within provided timeframe so it should not be downloaded.");
-        }
-
-    }
-
-
+function onFailed(error) {
+    console.log(`Download failed: ${error}`);
 }
 
-function checkIsInTimeFrame(siteValue, diff1, diff2) {
-    return siteValue <= diff1 && siteValue >= diff2;
-}
+var interval1= setInterval(()=>{
+    setTimeout(function() {
 
-function getVideoURL(index) {
-    // Now get the elements by classname
-    if(document.getElementsByClassName("feed-list-item")[0]) {
-        console.log("Start click event.");
-        let workCardThumbnail = $(".work-card-thumbnail");
-        if(workCardThumbnail !== undefined) {
-            console.log("Work card thumbnail was found.");
-        }else {
-            console.log("Work card thumbnail was not found.");
-        }
+        console.log("index start: "+index);
 
-        workCardThumbnail.eq(index).fclick();
+        // Text on how long ago video was uploaded e.g. 4 hours ago
+        var video_uploaded_on = $(".work-card-info-time").eq(index).text();
 
-        try {
-            // First sleep for 5 seconds so the video can load
-            sleep(5000);
-            // Now try to get the URL
-            if(document.getElementsByTagName("video")[0].currentSrc !== undefined) {
-                let url = document.getElementsByTagName("video")[0].currentSrc;
-                // Close the card again
+        // The number and the chinese text should be separated
+        // This creates an array --> if the video was uploaded hours ago then var hours will be the only variable that has a second (1) array item.
+        // The amount of items can be used to check how long ago the video was uploaded (e.g. hours, days, months)
+        var hours = video_uploaded_on.split("小时前");
+        var days = video_uploaded_on.split("天前");
+        var weeks = video_uploaded_on.split("周前");
+        var months = video_uploaded_on.split("月前");
+        var years = video_uploaded_on.split("年前");
+
+        // Check if the video was uploaded hours ago or not
+        if(hours[1] !== undefined) {
+            // Now check if the amount of hours ago is within the given timeframe
+            // To do that first check the amount of hours between right now and the start date
+            var diffNowAndStartHours = hourDiff(new Date(), new Date(startDate));
+            // Now also check the amount of hours between right now and the end date
+            var diffNowAndEndHours = hourDiff(new Date(), new Date(endDate));
+            // If the hours given by kuaishou fall within the timeframe then download the video
+            if(hours[0] <= diffNowAndStartHours && hours[0] >= diffNowAndEndHours) {
+                $(".work-card-thumbnail").eq(index).fclick();
+                if(document.getElementsByClassName("feed-list-item")[0]) {
+                    try {
+                        // Use delay so video can load
+                        setTimeout(function() {
+                            var videoTag = document.getElementsByTagName("video")[0].currentSrc;
+                            console.log(videoTag);
+                            var filename = index + "___" + new Date().getTime() + ".mp4";
+
+                            chrome.runtime.sendMessage({url: videoTag, filename: filename}, function(response) {
+                                console.log(response.message);
+                            });
+                        }, 5000);
+                    }catch (e) {
+                        console.log("Caught: "+e);
+                    }
+                }
                 $(".close").fclick();
-                sleep(2000);
-                return url;
-            }else {
-                console.log("The video URL for index " + index + " was undefined.");
             }
-        }catch (e) {
-            console.log("Caught error in getVideoURL(). error: " + e);
+        }else if(days[1] !== undefined) {
+            // Now check if the amount of days ago is within the given timeframe
+            // To do that first check the amount of days between right now and the start date
+            var diffNowAndStartDays = dayDiff(new Date(), new Date(startDate));
+            // Now also check the amount of days between right now and the end date
+            var diffNowAndEndDays = dayDiff(new Date(), new Date(endDate));
+            // If the days given by kuaishou fall within the timeframe then download the video
+            if(days[0] <= diffNowAndStartDays && days[0] >= diffNowAndEndDays) {
+                $(".work-card-thumbnail").eq(index).fclick();
+                if(document.getElementsByClassName("feed-list-item")[0]) {
+                    try {
+                        console.log("Trying...");
+                        // Use delay so video can load
+                        setTimeout(function() {
+                            var videoTag = document.getElementsByTagName("video")[0].currentSrc;
+                            console.log(videoTag);
+                            var filename = index + "___" + new Date().getTime() + ".mp4";
+
+                            chrome.runtime.sendMessage({url: videoTag, filename: filename}, function(response) {
+                                console.log(response.message);
+                            });
+                        }, 5000);
+                    }catch (e) {
+                        console.log("Caught: "+e);
+                    }
+                }
+                $(".close").fclick();
+            }
+        }else if(weeks[1] !== undefined) {
+            // Now check if the amount of weeks is within the given timeframe
+            // To do that first check the amount of weeks between right now and the start date
+            var diffNowAndStartWeeks = weekDiff(new Date(), new Date(startDate));
+            // Now also check the amount of days between right now and the end date
+            var diffNowAndEndWeeks = weekDiff(new Date(), new Date(endDate));
+            // If the weeks given by kuaishou fall within the timeframe then download the video
+            if(weeks[0] <= diffNowAndStartWeeks && weeks[0] >= diffNowAndEndWeeks) {
+                $(".work-card-thumbnail").eq(index).fclick();
+                if(document.getElementsByClassName("feed-list-item")[0]) {
+                    try {
+                        console.log("Trying...");
+                        // Use delay so video can load
+                        setTimeout(function() {
+                            var videoTag = document.getElementsByTagName("video")[0].currentSrc;
+                            console.log(videoTag);
+                            var filename = index + "___" + new Date().getTime() + ".mp4";
+
+                            chrome.runtime.sendMessage({url: videoTag, filename: filename}, function(response) {
+                                console.log(response.message);
+                            });
+                        }, 5000);
+                    }catch (e) {
+                        console.log("Caught: "+e);
+                    }
+                }
+                $(".close").fclick();
+            }
+        }else if(months[1] !== undefined) {
+            var diffNowAndStartMonths = monthDiff(new Date(), new Date(startDate));
+            var diffNowAndEndMonths = monthDiff(new Date(), new Date(endDate));
+            if(months[0] <= diffNowAndStartMonths && months[0] >= diffNowAndEndMonths) {
+                $(".work-card-thumbnail").eq(index).fclick();
+                if(document.getElementsByClassName("feed-list-item")[0]) {
+                    try {
+                        // Use delay so video can load
+                        setTimeout(function() {
+                            var videoTag = document.getElementsByTagName("video")[0].currentSrc;
+                            console.log(videoTag);
+                            var filename = index + "___" + new Date().getTime() + ".mp4";
+
+                            chrome.runtime.sendMessage({url: videoTag, filename: filename}, function(response) {
+                                console.log(response.message);
+                            });
+                        }, 5000);
+                    }catch (e) {
+                        console.log("Caught: "+e);
+                    }
+                }
+                $(".close").fclick();
+            }
+        }else if(years[1] !== undefined) {
+            var diffNowAndStartYears = yearDiff(new Date(), new Date(startDate));
+            var diffNowAndEndYears = yearDiff(new Date(), new Date(endDate));
+            if(years[0] <= diffNowAndStartYears && years[0] >= diffNowAndEndYears) {
+                $(".work-card-thumbnail").eq(index).fclick();
+                if(document.getElementsByClassName("feed-list-item")[0]) {
+                    try {
+                        // Use delay so video can load
+                        setTimeout(function() {
+                            var videoTag = document.getElementsByTagName("video")[0].currentSrc;
+                            console.log(videoTag);
+                            var filename = index + "___" + new Date().getTime() + ".mp4";
+
+                            chrome.runtime.sendMessage({url: videoTag, filename: filename}, function(response) {
+                                console.log(response.message);
+                            });
+                        }, 5000);
+                    }catch (e) {
+                        console.log("Caught: "+e);
+                    }
+                }
+                $(".close").fclick();
+            }
         }
-    }
-}
 
-function download(index, url) {
-    // First create the new filename for the video
-    let newFileName = index + "___" + new Date().getTime() + "_property-of-Pusic-Entertainment.mp4";
-    console.log("Download filename for video " + index + " is " + newFileName);
+        if(index !== video.length) {
+            index++;
+        }else {
+            clearInterval(interval1);
+        }
 
-    // Now start the download
-    chrome.runtime.sendMessage({url: url, filename: newFileName}, function(response) {
-        console.log("Download response for video " + index + " is " + response.message);
-    });
-}
+        console.log("index end: "+index);
+
+
+    }, 500);
+},20000);
