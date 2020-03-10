@@ -89,7 +89,7 @@ let interval1= setInterval(()=>{
                 $(".work-card-thumbnail").eq(index).fclick();
                 if(document.getElementsByClassName("feed-list-item")[0]) {
 
-                    try {
+                    if(!(document.getElementsByClassName("viewer-container-img").length > 0)) {
                         log("Sleeping for 2500 milliseconds before video URL is gathered for video on position: " + (index+1))
                         sleepFor(2500);
 
@@ -97,8 +97,8 @@ let interval1= setInterval(()=>{
                         log("Video URL for video on position " + (index+1) + " is: " + videoURL);
 
                         download(videoURL);
-                    }catch (e) {
-                        log("Something went wrong while downloading video on position: " + (index+1) + ". Message: " + e);
+                    }else {
+                        log("Item in card on position " + (index+1) + " is apparently a video.");
                     }
 
                 }
@@ -113,7 +113,7 @@ let interval1= setInterval(()=>{
                 $(".work-card-thumbnail").eq(index).fclick();
                 if(document.getElementsByClassName("feed-list-item")[0]) {
 
-                    try {
+                    if(!(document.getElementsByClassName("viewer-container-img").length > 0)) {
                         log("Sleeping for 2500 milliseconds before video URL is gathered for video on position: " + (index+1))
                         sleepFor(2500);
 
@@ -121,8 +121,8 @@ let interval1= setInterval(()=>{
                         log("Video URL for video on position " + (index+1) + " is: " + videoURL);
 
                         download(videoURL);
-                    }catch (e) {
-                        log("Something went wrong while downloading video on position: " + (index+1) + ". Message: " + e);
+                    }else {
+                        log("Item in card on position " + (index+1) + " is apparently a video.");
                     }
 
                 }
@@ -137,7 +137,7 @@ let interval1= setInterval(()=>{
                 $(".work-card-thumbnail").eq(index).fclick();
                 if(document.getElementsByClassName("feed-list-item")[0]) {
 
-                    try {
+                    if(!(document.getElementsByClassName("viewer-container-img").length > 0)) {
                         log("Sleeping for 2500 milliseconds before video URL is gathered for video on position: " + (index+1))
                         sleepFor(2500);
 
@@ -145,8 +145,8 @@ let interval1= setInterval(()=>{
                         log("Video URL for video on position " + (index+1) + " is: " + videoURL);
 
                         download(videoURL);
-                    }catch (e) {
-                        log("Something went wrong while downloading video on position: " + (index+1) + ". Message: " + e);
+                    }else {
+                        log("Item in card on position " + (index+1) + " is apparently a video.");
                     }
 
                 }
@@ -161,7 +161,7 @@ let interval1= setInterval(()=>{
                 $(".work-card-thumbnail").eq(index).fclick();
                 if(document.getElementsByClassName("feed-list-item")[0]) {
 
-                    try {
+                    if(!(document.getElementsByClassName("viewer-container-img").length > 0)) {
                         log("Sleeping for 2500 milliseconds before video URL is gathered for video on position: " + (index+1))
                         sleepFor(2500);
 
@@ -169,8 +169,8 @@ let interval1= setInterval(()=>{
                         log("Video URL for video on position " + (index+1) + " is: " + videoURL);
 
                         download(videoURL);
-                    }catch (e) {
-                        log("Something went wrong while downloading video on position: " + (index+1) + ". Message: " + e);
+                    }else {
+                        log("Item in card on position " + (index+1) + " is apparently a video.");
                     }
 
                 }
@@ -185,7 +185,7 @@ let interval1= setInterval(()=>{
                 $(".work-card-thumbnail").eq(index).fclick();
                 if(document.getElementsByClassName("feed-list-item")[0]) {
 
-                    try {
+                    if(!(document.getElementsByClassName("viewer-container-img").length > 0)) {
                         log("Sleeping for 2500 milliseconds before video URL is gathered for video on position: " + (index+1))
                         sleepFor(2500);
 
@@ -193,9 +193,10 @@ let interval1= setInterval(()=>{
                         log("Video URL for video on position " + (index+1) + " is: " + videoURL);
 
                         download(videoURL);
-                    }catch (e) {
-                        log("Something went wrong while downloading video on position: " + (index+1) + ". Message: " + e);
+                    }else {
+                        log("Item in card on position " + (index+1) + " is apparently a video.");
                     }
+
 
                 }
                 $(".close").fclick();
