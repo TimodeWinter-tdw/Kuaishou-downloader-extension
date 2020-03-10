@@ -23,7 +23,7 @@ $(document).ready(function(){
            filename: request.filename,
            saveAs: false
         });
-        sendResponse({message: "Download started"});
+        sendResponse({message: "Video download started!"});
     });
 
 });
