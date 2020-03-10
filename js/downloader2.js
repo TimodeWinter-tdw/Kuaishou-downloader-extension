@@ -89,13 +89,18 @@ let interval1= setInterval(()=>{
                 $(".work-card-thumbnail").eq(index).fclick();
                 if(document.getElementsByClassName("feed-list-item")[0]) {
 
-                    log("Sleeping for 2500 milliseconds before video URL is gathered for video on position: " + (index+1))
-                    sleepFor(2500);
+                    try {
+                        log("Sleeping for 2500 milliseconds before video URL is gathered for video on position: " + (index+1))
+                        sleepFor(2500);
 
-                    let videoURL = document.getElementsByTagName("video")[0].currentSrc;
-                    log("Video URL for video on position " + (index+1) + " is: " + videoURL);
+                        let videoURL = document.getElementsByTagName("video")[0].currentSrc;
+                        log("Video URL for video on position " + (index+1) + " is: " + videoURL);
 
-                    download(videoURL);
+                        download(videoURL);
+                    }catch (e) {
+                        log("Something went wrong while downloading video on position: " + (index+1) + ". Message: " + e);
+                    }
+
                 }
                 $(".close").fclick();
             }
@@ -108,13 +113,18 @@ let interval1= setInterval(()=>{
                 $(".work-card-thumbnail").eq(index).fclick();
                 if(document.getElementsByClassName("feed-list-item")[0]) {
 
-                    log("Sleeping for 2500 milliseconds before video URL is gathered for video on position: " + (index+1))
-                    sleepFor(2500);
+                    try {
+                        log("Sleeping for 2500 milliseconds before video URL is gathered for video on position: " + (index+1))
+                        sleepFor(2500);
 
-                    let videoURL = document.getElementsByTagName("video")[0].currentSrc;
-                    log("Video URL for video on position " + (index+1) + " is: " + videoURL);
+                        let videoURL = document.getElementsByTagName("video")[0].currentSrc;
+                        log("Video URL for video on position " + (index+1) + " is: " + videoURL);
 
-                    download(videoURL);
+                        download(videoURL);
+                    }catch (e) {
+                        log("Something went wrong while downloading video on position: " + (index+1) + ". Message: " + e);
+                    }
+
                 }
                 $(".close").fclick();
             }
@@ -127,13 +137,18 @@ let interval1= setInterval(()=>{
                 $(".work-card-thumbnail").eq(index).fclick();
                 if(document.getElementsByClassName("feed-list-item")[0]) {
 
-                    log("Sleeping for 2500 milliseconds before video URL is gathered for video on position: " + (index+1))
-                    sleepFor(2500);
+                    try {
+                        log("Sleeping for 2500 milliseconds before video URL is gathered for video on position: " + (index+1))
+                        sleepFor(2500);
 
-                    let videoURL = document.getElementsByTagName("video")[0].currentSrc;
-                    log("Video URL for video on position " + (index+1) + " is: " + videoURL);
+                        let videoURL = document.getElementsByTagName("video")[0].currentSrc;
+                        log("Video URL for video on position " + (index+1) + " is: " + videoURL);
 
-                    download(videoURL);
+                        download(videoURL);
+                    }catch (e) {
+                        log("Something went wrong while downloading video on position: " + (index+1) + ". Message: " + e);
+                    }
+
                 }
                 $(".close").fclick();
             }
@@ -146,13 +161,18 @@ let interval1= setInterval(()=>{
                 $(".work-card-thumbnail").eq(index).fclick();
                 if(document.getElementsByClassName("feed-list-item")[0]) {
 
-                    log("Sleeping for 2500 milliseconds before video URL is gathered for video on position: " + (index+1))
-                    sleepFor(2500);
+                    try {
+                        log("Sleeping for 2500 milliseconds before video URL is gathered for video on position: " + (index+1))
+                        sleepFor(2500);
 
-                    let videoURL = document.getElementsByTagName("video")[0].currentSrc;
-                    log("Video URL for video on position " + (index+1) + " is: " + videoURL);
+                        let videoURL = document.getElementsByTagName("video")[0].currentSrc;
+                        log("Video URL for video on position " + (index+1) + " is: " + videoURL);
 
-                    download(videoURL);
+                        download(videoURL);
+                    }catch (e) {
+                        log("Something went wrong while downloading video on position: " + (index+1) + ". Message: " + e);
+                    }
+
                 }
                 $(".close").fclick();
             }
@@ -165,13 +185,18 @@ let interval1= setInterval(()=>{
                 $(".work-card-thumbnail").eq(index).fclick();
                 if(document.getElementsByClassName("feed-list-item")[0]) {
 
-                    log("Sleeping for 2500 milliseconds before video URL is gathered for video on position: " + (index+1))
-                    sleepFor(2500);
+                    try {
+                        log("Sleeping for 2500 milliseconds before video URL is gathered for video on position: " + (index+1))
+                        sleepFor(2500);
 
-                    let videoURL = document.getElementsByTagName("video")[0].currentSrc;
-                    log("Video URL for video on position " + (index+1) + " is: " + videoURL);
+                        let videoURL = document.getElementsByTagName("video")[0].currentSrc;
+                        log("Video URL for video on position " + (index+1) + " is: " + videoURL);
 
-                    download(videoURL);
+                        download(videoURL);
+                    }catch (e) {
+                        log("Something went wrong while downloading video on position: " + (index+1) + ". Message: " + e);
+                    }
+
                 }
                 $(".close").fclick();
             }
