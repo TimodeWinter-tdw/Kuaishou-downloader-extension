@@ -68,13 +68,13 @@ function scrollToBottom() {
     let bottom = document.body.scrollHeight;
     let current = window.innerHeight + document.body.scrollTop;
 
-    if (registeredEqual < 5) {
+    if (registeredEqual < 10) {
         if((bottom-current) > 0) {
 
             /* To make sure that the page stops scrolling and can start the downloading
                 we have to save bottom.
-                If bottom is the same 5 times over we now we are at the bottom of the page
-                Use 5 to make sure that we are at the bottom. Sometimes it is the same due
+                If bottom is the same 10 times over we now we are at the bottom of the page
+                Use 10 to make sure that we are at the bottom. Sometimes it is the same due
                 to lag.
              */
             if (registeredBottom === bottom) {
@@ -192,6 +192,7 @@ function filter(index) {
 }
 
 function prepareDownload(index) {
+    console.log(`Prepare download for video ${index} started.`);
     $(".work-card-thumbnail").eq(index).fclick();
 
     if(document.getElementsByClassName("feed-list-item")[0]) {
