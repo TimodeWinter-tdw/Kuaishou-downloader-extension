@@ -42,21 +42,25 @@ function yearDiff(date1, date2) {
     return date1.getFullYear() - date2.getFullYear();
 }
 
-// Registering the videos
-function registerVideos() {
-    // Registering the total amount of videos
-    let videoArray;
-
-    if (registeredEqual >= 5) {
-        // Get the total amount of videos on the page
-        videoArray = document.getElementsByClassName('work-card-thumbnail');
-        console.log("Amount of videos: " + videoArray.length);
-    }
+// Sleep function
+function sleepFor( sleepDuration ){
+    let now = new Date().getTime();
+    while(new Date().getTime() < now + sleepDuration){ /* do nothing */ }
 }
+
+// Registering the videos
+let videoArray;
+let totalVideos;
 
 // Registering for scrolling
 let registeredBottom = 0;
 let registeredEqual = 0;
+
+// Errors
+let error = [];
+
+// Video URL array
+let videoUrls = [];
 
 // First scroll to bottom
 function scrollToBottom() {
@@ -77,6 +81,7 @@ function scrollToBottom() {
                 registeredEqual++;
                 console.log("Registered equal increased. New value: " + registeredEqual);
             }else {
+                registeredEqual = 0;
                 registeredBottom = bottom;
                 console.log("Registered bottom changed. New value: " + registeredBottom);
             }
@@ -85,9 +90,120 @@ function scrollToBottom() {
             setTimeout ( 'scrollToBottom()', 1000 );
         }
     }else {
-        registerVideos();
+        // registerVideos();
+    }
+}
+
+function registerVideos() {
+    // Registering the total amount of videos
+    if (registeredEqual >= 5) {
+        // Get the total amount of videos on the page
+        videoArray = document.getElementsByClassName('work-card-thumbnail');
+        totalVideos = videoArray.length;
+        console.log("Total amount of videos: " + totalVideos);
+    }
+    start();
+}
+
+function start() {
+    // For each video execute the following actions
+    for (let i = 0; i < totalVideos; i++) {
+        console.log("----------------------------");
+        console.log(`Download process for video ${i} started.`);
+
+        // Check if the video should be downloaded or not
+        if(filter(i) === true) {
+
+        }else {
+            console.log("The video falls out of timeframe and should not be downloaded.");
+        }
+    }
+}
+
+function filter(index) {
+    console.log(`Filter for video ${index}`);
+
+    let uploaded_on = $('.work-card-info-time').eq(index).text();
+
+    let hours = uploaded_on.split("小时前");
+    let days = uploaded_on.split("天前");
+    let weeks = uploaded_on.split("周前");
+    let months = uploaded_on.split("月前");
+    let years = uploaded_on.split("年前");
+
+    if(hours[0] !== undefined) {
+        let diffNowAndStartHours = hourDiff(new Date(), new Date(startDate));
+        let diffNowAndEndHours = hourDiff(new Date(), new Date(endDate));
+
+        if(hours[0] <= diffNowAndStartHours && hours[0] >= diffNowAndEndHours) {
+            return true;
+        }
+    }else if(days[0] !== undefined) {
+        let diffNowAndStartDays = dayDiff(new Date(), new Date(startDate));
+        let diffNowAndEndDays = dayDiff(new Date(), new Date(endDate));
+
+        if(days[0] <= diffNowAndStartDays && days[0] >= diffNowAndEndDays) {
+            return true;
+        }
+    }else if(weeks[0] !== undefined) {
+        let diffNowAndStartWeeks = weekDiff(new Date(), new Date(startDate));
+        let diffNowAndEndWeeks = weekDiff(new Date(), new Date(endDate));
+
+        if(weeks[0] <= diffNowAndStartWeeks && weeks[0] >= diffNowAndEndWeeks) {
+            return true;
+        }
+    }else if(months[0] !== undefined) {
+        let diffNowAndStartMonths = monthDiff(new Date(), new Date(startDate));
+        let diffNowAndEndMonths = monthDiff(new Date(), new Date(endDate));
+
+        if(months[0] <= diffNowAndStartMonths && months[0] >= diffNowAndEndMonths) {
+            return true;
+        }
+    }else if(years[0] !== undefined) {
+        let diffNowAndStartYears = yearDiff(new Date(), new Date(startDate));
+        let diffNowAndEndYears = yearDiff(new Date(), new Date(endDate));
+
+        if(years[0] <= diffNowAndStartYears && years[0] >= diffNowAndEndYears) {
+            return true;
+        }
+    }
+}
+
+function prepareDownload(index) {
+    $(".work-card-thumbnail").eq(index).fclick();
+
+    if(document.getElementsByClassName("feed-list-item")[0]) {
+
+        // Check if the item is not an image
+        if(!(document.getElementsByClassName("viewer-container-img").length > 0)) {
+            console.log(`Sleep for 2500 milliseconds so the video on index ${index} can load.`);
+            sleepFor(2500);
+
+            let videoURL = document.getElementsByTagName("video")[0].currentSrc;
+
+            if (videoURL !== "" && videoURL !== undefined && videoURL !== null) {
+                console.log(`Video URL on index ${index} is: ${videoURL}`);
+            }else {
+                console.log(`Could not get the URL for video on index: ${index}`);
+                error.push({
+                    index: index,
+                    description: ""
+                });
+            }
+
+        }else {
+            error.push({
+                index: index,
+                description: "Item does not seem to be a video."
+            });
+        }
+    }else {
+        error.push({
+            index: index,
+            description: "Could not get elements by classname."
+        });
+        console.log(`Could not elements by classname for video ${index}. Error saved.`);
     }
 }
 
 scrollToBottom();
-
