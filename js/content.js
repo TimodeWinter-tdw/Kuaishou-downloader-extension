@@ -43,7 +43,12 @@ function yearDiff(date1, date2) {
 }
 
 // First scroll to bottom
-$("html, body").animate({
-    scrollTop: $(
-        'html, body').get(0).scrollHeight
-}, 2000);
+function scrollToBottom(){
+    let bottom = document.body.scrollHeight;
+    let current = window.innerHeight+ document.body.scrollTop;
+    if((bottom-current) > 0){
+        window.scrollTo(0, bottom);
+        setTimeout ( 'scrollToBottom()', 1000 );
+    }
+}
+scrollToBottom();
