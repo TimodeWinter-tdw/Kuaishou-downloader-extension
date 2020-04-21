@@ -197,12 +197,15 @@ function prepareDownload(index) {
     $(".work-card-thumbnail").eq(index).fclick();
 
     if(document.getElementsByClassName("feed-list-item")[0]) {
+        console.log("getElementsByClassName was successful");
 
         // Check if the item is not an image
         if(!(document.getElementsByClassName("viewer-container-img").length > 0)) {
+            console.log("Item seems to be a video.");
             // console.log(`Sleep for 2500 milliseconds so the video on index ${index} can load.`);
 
             let videoURL = document.getElementsByTagName("video")[0].currentSrc;
+            console.log("Executed function to get currentSrc. Src: " + videoURL);
 
             if (videoURL !== "" && videoURL !== undefined && videoURL !== null) {
                 console.log(`Video URL on index ${index} is: ${videoURL}`);
