@@ -102,7 +102,7 @@ function registerVideos() {
         totalVideos = videoArray.length;
         console.log("Total amount of videos: " + totalVideos);
     }
-    // start();
+    start();
 }
 
 function start() {
@@ -113,7 +113,8 @@ function start() {
 
         // Check if the video should be downloaded or not
         if(filter(i) === true) {
-
+            prepareDownload();
+            console.log("Total saved video URL's: " + videoUrls.length + " of " + totalVideos);
         }else {
             console.log("The video falls out of timeframe and should not be downloaded.");
         }
@@ -183,14 +184,17 @@ function prepareDownload(index) {
 
             if (videoURL !== "" && videoURL !== undefined && videoURL !== null) {
                 console.log(`Video URL on index ${index} is: ${videoURL}`);
+                videoUrls.push({
+                    index: index,
+                    url: videoURL
+                });
             }else {
                 console.log(`Could not get the URL for video on index: ${index}`);
                 error.push({
                     index: index,
-                    description: ""
+                    description: "Could not get the URL for this video."
                 });
             }
-
         }else {
             error.push({
                 index: index,
@@ -204,6 +208,8 @@ function prepareDownload(index) {
         });
         console.log(`Could not elements by classname for video ${index}. Error saved.`);
     }
+
+    $(".close").fclick();
 }
 
 scrollToBottom();
