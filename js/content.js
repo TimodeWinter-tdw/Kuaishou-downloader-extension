@@ -63,8 +63,10 @@ function scrollToBottom() {
              */
             if (registeredBottom === bottom) {
                 registeredEqual++;
+                console.log("Registered equal increased. New value: " + registeredEqual);
             }else {
                 registeredBottom = bottom;
+                console.log("Registered bottom changed. New value: " + registeredBottom);
             }
 
             window.scrollTo(0, bottom);
