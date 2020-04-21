@@ -11,6 +11,7 @@ fireEvent = function (element, event) {
 
 //Fires the click event
 jQuery.fn.fclick = function () {
+    console.log("Click event started.");
     $(this).each( function() {
         fireEvent(this, "click");
     });
