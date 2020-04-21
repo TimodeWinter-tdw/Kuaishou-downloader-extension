@@ -43,6 +43,8 @@ function yearDiff(date1, date2) {
 }
 
 // First scroll to bottom
+console.log("Start!");
+
 $(window).on("scroll", function() {
     let scrollHeight = $(document).height();
     let scrollPosition = $(window).height() + $(window).scrollTop();

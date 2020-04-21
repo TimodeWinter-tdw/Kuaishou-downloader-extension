@@ -2,11 +2,8 @@ $(document).ready(function(){
     $('#downloadBtn').on('click', function(){
         var videoUrl = $('#profileUrl').val();
         chrome.tabs.update({ url: videoUrl },function(){
-
             setTimeout(update, 4000);
         });
-
-        document.getElementById('download_div').style.display = "block";
     });
 
     chrome.runtime.onMessage.addListener(
