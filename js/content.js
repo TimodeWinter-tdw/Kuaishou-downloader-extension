@@ -114,7 +114,7 @@ function start() {
 
         // Check if the video should be downloaded or not
         if(filter(i) === true) {
-            prepareDownload();
+            prepareDownload(i);
             console.log("Total saved video URL's: " + videoUrls.length + " of " + totalVideos);
         }else {
             console.log("The video falls out of timeframe and should not be downloaded.");
