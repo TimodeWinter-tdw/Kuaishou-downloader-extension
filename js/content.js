@@ -132,39 +132,60 @@ function filter(index) {
     let months = uploaded_on.split("月前");
     let years = uploaded_on.split("年前");
 
+    console.log("Hours: " + hours[0]);
+    console.log("Days: " + days[0]);
+    console.log("Weeks: " + weeks[0]);
+    console.log("Months: " + months[0]);
+    console.log("Years: " + years[0]);
+
     if(hours[0] !== undefined) {
+        console.log("Video was uploaded hours ago.");
+
         let diffNowAndStartHours = hourDiff(new Date(), new Date(startDate));
         let diffNowAndEndHours = hourDiff(new Date(), new Date(endDate));
 
         if(hours[0] <= diffNowAndStartHours && hours[0] >= diffNowAndEndHours) {
+            console.log("Video falls within given timeframe.");
             return true;
         }
     }else if(days[0] !== undefined) {
+        console.log("Video was uploaded days ago.");
+
         let diffNowAndStartDays = dayDiff(new Date(), new Date(startDate));
         let diffNowAndEndDays = dayDiff(new Date(), new Date(endDate));
 
         if(days[0] <= diffNowAndStartDays && days[0] >= diffNowAndEndDays) {
+            console.log("Video falls within given timeframe.");
             return true;
         }
     }else if(weeks[0] !== undefined) {
+        console.log("Video was uploaded weeks ago.");
+
         let diffNowAndStartWeeks = weekDiff(new Date(), new Date(startDate));
         let diffNowAndEndWeeks = weekDiff(new Date(), new Date(endDate));
 
         if(weeks[0] <= diffNowAndStartWeeks && weeks[0] >= diffNowAndEndWeeks) {
+            console.log("Video falls within given timeframe.");
             return true;
         }
     }else if(months[0] !== undefined) {
+        console.log("Video was uploaded months ago.");
+
         let diffNowAndStartMonths = monthDiff(new Date(), new Date(startDate));
         let diffNowAndEndMonths = monthDiff(new Date(), new Date(endDate));
 
         if(months[0] <= diffNowAndStartMonths && months[0] >= diffNowAndEndMonths) {
+            console.log("Video falls within given timeframe.");
             return true;
         }
     }else if(years[0] !== undefined) {
+        console.log("Video was uploaded years ago.");
+
         let diffNowAndStartYears = yearDiff(new Date(), new Date(startDate));
         let diffNowAndEndYears = yearDiff(new Date(), new Date(endDate));
 
         if(years[0] <= diffNowAndStartYears && years[0] >= diffNowAndEndYears) {
+            console.log("Video falls within given timeframe.");
             return true;
         }
     }
