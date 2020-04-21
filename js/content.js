@@ -42,6 +42,18 @@ function yearDiff(date1, date2) {
     return date1.getFullYear() - date2.getFullYear();
 }
 
+// Registering the videos
+function registerVideos() {
+    // Registering the total amount of videos
+    let videoArray;
+
+    if (registeredEqual >= 5) {
+        // Get the total amount of videos on the page
+        videoArray = document.getElementsByClassName('work-card-thumbnail');
+        console.log("Amount of videos: " + videoArray.length);
+    }
+}
+
 // Registering for scrolling
 let registeredBottom = 0;
 let registeredEqual = 0;
@@ -72,16 +84,10 @@ function scrollToBottom() {
             window.scrollTo(0, bottom);
             setTimeout ( 'scrollToBottom()', 1000 );
         }
+    }else {
+        registerVideos();
     }
 }
 
 scrollToBottom();
 
-// Registering the total amount of videos
-let videoArray;
-
-if (registeredEqual >= 5) {
-    // Get the total amount of videos on the page
-    videoArray = document.getElementsByClassName('work-card-thumbnail');
-    console.log("Amount of videos: " + videoArray.length);
-}
