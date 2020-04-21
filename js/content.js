@@ -203,7 +203,7 @@ function prepareDownload(index) {
         if(!(document.getElementsByClassName("viewer-container-img").length > 0)) {
             console.log("Item seems to be a video.");
 
-            let videoURL = $("video")[0].context.currentSrc;
+            // let videoURL = $("video")[0].context.currentSrc;
             console.log("Executed function to get currentSrc. Src: " + videoURL);
 
             if (videoURL !== "" && videoURL !== undefined && videoURL !== null) {
