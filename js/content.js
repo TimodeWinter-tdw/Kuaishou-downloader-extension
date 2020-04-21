@@ -90,7 +90,7 @@ function scrollToBottom() {
             setTimeout ( 'scrollToBottom()', 1000 );
         }
     }else {
-        // registerVideos();
+        registerVideos();
     }
 }
 
@@ -102,7 +102,7 @@ function registerVideos() {
         totalVideos = videoArray.length;
         console.log("Total amount of videos: " + totalVideos);
     }
-    start();
+    // start();
 }
 
 function start() {
