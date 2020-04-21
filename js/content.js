@@ -200,7 +200,7 @@ function prepareDownload(index) {
 
         // Check if the item is not an image
         if(!(document.getElementsByClassName("viewer-container-img").length > 0)) {
-            console.log(`Sleep for 2500 milliseconds so the video on index ${index} can load.`);
+            // console.log(`Sleep for 2500 milliseconds so the video on index ${index} can load.`);
 
             let videoURL = document.getElementsByTagName("video")[0].currentSrc;
 
