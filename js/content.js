@@ -50,7 +50,7 @@ function scrollToBottom(){
         window.scrollTo(0, bottom);
         setTimeout ( 'scrollToBottom()', 1000 );
 
-        console.log("Bottom: " + bottom + ". Current: " + current + ". B-C: " + bottom-current);
+        console.log("Bottom: " + bottom + ". Current: " + current);
     }else {
         console.log("Bottom?");
     }
