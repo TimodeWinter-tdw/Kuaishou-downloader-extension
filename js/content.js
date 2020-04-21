@@ -49,6 +49,8 @@ function scrollToBottom(){
     if((bottom-current) > 0){
         window.scrollTo(0, bottom);
         setTimeout ( 'scrollToBottom()', 1000 );
+    }else {
+        console.log("At the bottom!");
     }
 }
 scrollToBottom();
