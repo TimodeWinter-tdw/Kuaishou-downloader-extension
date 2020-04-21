@@ -50,12 +50,10 @@ let registeredEqual = 0;
 function scrollToBottom() {
 
     let bottom = document.body.scrollHeight;
-    let current = window.innerHeight+ document.body.scrollTop;
+    let current = window.innerHeight + document.body.scrollTop;
 
     if (registeredEqual < 5) {
         if((bottom-current) > 0) {
-            window.scrollTo(0, bottom);
-            setTimeout ( 'scrollToBottom()', 1000 );
 
             /* To make sure that the page stops scrolling and can start the downloading
                 we have to save bottom.
@@ -64,11 +62,13 @@ function scrollToBottom() {
                 to lag.
              */
             if (registeredBottom === bottom) {
-                registeredBottom++;
+                registeredEqual++;
             }else {
                 registeredBottom = bottom;
             }
 
+            window.scrollTo(0, bottom);
+            setTimeout ( 'scrollToBottom()', 1000 );
         }
     }
 }
