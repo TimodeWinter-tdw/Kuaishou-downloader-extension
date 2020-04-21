@@ -43,12 +43,10 @@ function yearDiff(date1, date2) {
 }
 
 // First scroll to bottom
-console.log("Start!");
-
-$(window).on("scroll", function() {
-    let scrollHeight = $(document).height();
-    let scrollPosition = $(window).height() + $(window).scrollTop();
-    if ((scrollHeight - scrollPosition) / scrollHeight === 0) {
-        console.log("At the bottom!");
-    }
-});
+setInterval(function(){
+        $("html, body").animate({
+            scrollTop: $(
+                'html, body').get(0).scrollHeight
+        }, 2000);
+    },
+2000);
