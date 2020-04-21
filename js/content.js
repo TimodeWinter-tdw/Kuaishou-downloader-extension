@@ -52,7 +52,7 @@ function scrollToBottom() {
     let bottom = document.body.scrollHeight;
     let current = window.innerHeight+ document.body.scrollTop;
 
-    while (registeredEqual < 5) {
+    if (registeredEqual < 5) {
         if((bottom-current) > 0) {
             window.scrollTo(0, bottom);
             setTimeout ( 'scrollToBottom()', 1000 );
