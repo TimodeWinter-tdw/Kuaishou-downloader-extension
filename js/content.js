@@ -49,8 +49,10 @@ function scrollToBottom(){
     if((bottom-current) > 0){
         window.scrollTo(0, bottom);
         setTimeout ( 'scrollToBottom()', 1000 );
+
+        console.log("Bottom: " + bottom + ". Current: " + current + ". B-C: " + bottom-current);
     }else {
-        console.log("At the bottom!");
+        console.log("Bottom?");
     }
 }
 scrollToBottom();
