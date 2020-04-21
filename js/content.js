@@ -42,17 +42,44 @@ function yearDiff(date1, date2) {
     return date1.getFullYear() - date2.getFullYear();
 }
 
+// Registering for scrolling
+let registeredBottom = 0;
+let registeredEqual = 0;
+
 // First scroll to bottom
-function scrollToBottom(){
+function scrollToBottom() {
+
     let bottom = document.body.scrollHeight;
     let current = window.innerHeight+ document.body.scrollTop;
-    if((bottom-current) > 0){
-        window.scrollTo(0, bottom);
-        setTimeout ( 'scrollToBottom()', 1000 );
 
-        console.log("Bottom: " + bottom + ". Current: " + current);
-    }else {
-        console.log("Bottom?");
+    while (registeredEqual < 5) {
+        if((bottom-current) > 0) {
+            window.scrollTo(0, bottom);
+            setTimeout ( 'scrollToBottom()', 1000 );
+
+            /* To make sure that the page stops scrolling and can start the downloading
+                we have to save bottom.
+                If bottom is the same 5 times over we now we are at the bottom of the page
+                Use 5 to make sure that we are at the bottom. Sometimes it is the same due
+                to lag.
+             */
+            if (registeredBottom === bottom) {
+                registeredBottom++;
+            }else {
+                registeredBottom = bottom;
+            }
+
+        }
     }
 }
+
 scrollToBottom();
+
+// Registering the total amount of videos
+let videoArray;
+
+if (registeredEqual >= 5) {
+    // Get the total amount of videos on the page
+    videoArray = document.getElementsByClassName('work-card-thumbnail');
+    console.log("Amount of videos: " + videoArray.length);
+}
