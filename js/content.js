@@ -204,7 +204,7 @@ function prepareDownload(index) {
             console.log("Item seems to be a video.");
             // console.log(`Sleep for 2500 milliseconds so the video on index ${index} can load.`);
 
-            let videoURL = document.getElementsByTagName("video")[0].currentSrc;
+            let videoURL = document.getElementsByTagName("video")[0].attr('src');
             console.log("Executed function to get currentSrc. Src: " + videoURL);
 
             if (videoURL !== "" && videoURL !== undefined && videoURL !== null) {
