@@ -132,13 +132,13 @@ function filter(index) {
     let months = uploaded_on.split("月前");
     let years = uploaded_on.split("年前");
 
-    console.log("Hours: " + hours[0]);
-    console.log("Days: " + days[0]);
-    console.log("Weeks: " + weeks[0]);
-    console.log("Months: " + months[0]);
-    console.log("Years: " + years[0]);
+    console.log("Hours: " + hours[1]);
+    console.log("Days: " + days[1]);
+    console.log("Weeks: " + weeks[1]);
+    console.log("Months: " + months[1]);
+    console.log("Years: " + years[1]);
 
-    if(hours[0] !== undefined) {
+    if(hours[1] !== undefined) {
         console.log("Video was uploaded hours ago.");
 
         let diffNowAndStartHours = hourDiff(new Date(), new Date(startDate));
@@ -148,7 +148,7 @@ function filter(index) {
             console.log("Video falls within given timeframe.");
             return true;
         }
-    }else if(days[0] !== undefined) {
+    }else if(days[1] !== undefined) {
         console.log("Video was uploaded days ago.");
 
         let diffNowAndStartDays = dayDiff(new Date(), new Date(startDate));
@@ -158,7 +158,7 @@ function filter(index) {
             console.log("Video falls within given timeframe.");
             return true;
         }
-    }else if(weeks[0] !== undefined) {
+    }else if(weeks[1] !== undefined) {
         console.log("Video was uploaded weeks ago.");
 
         let diffNowAndStartWeeks = weekDiff(new Date(), new Date(startDate));
@@ -168,7 +168,7 @@ function filter(index) {
             console.log("Video falls within given timeframe.");
             return true;
         }
-    }else if(months[0] !== undefined) {
+    }else if(months[1] !== undefined) {
         console.log("Video was uploaded months ago.");
 
         let diffNowAndStartMonths = monthDiff(new Date(), new Date(startDate));
@@ -178,7 +178,7 @@ function filter(index) {
             console.log("Video falls within given timeframe.");
             return true;
         }
-    }else if(years[0] !== undefined) {
+    }else if(years[1] !== undefined) {
         console.log("Video was uploaded years ago.");
 
         let diffNowAndStartYears = yearDiff(new Date(), new Date(startDate));
