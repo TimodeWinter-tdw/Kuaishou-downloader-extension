@@ -203,6 +203,9 @@ function start(tryTime) {
         (() => {
             let index = 0;
 
+            // Empty the URL array
+            videoUrls = [];
+
             function prepareDownload() {
                 if(index < error.length) {
 
@@ -309,6 +312,19 @@ function startDownloads(retry) {
     // Retry for the failed videos
     if (retry) {
         start("second");
+    }else {
+        console.log("--------------------------------");
+        console.log("--------------------------------");
+        console.log("--------------------------------");
+        console.log("--------------------------------");
+        console.log("Errors:");
+        error.forEach((item, index) => {
+           console.log(`${index} // Video: ${item.index} -> ${item.description}`);
+        });
+        console.log("--------------------------------");
+        console.log("--------------------------------");
+        console.log("--------------------------------");
+        console.log("--------------------------------");
     }
 }
 
