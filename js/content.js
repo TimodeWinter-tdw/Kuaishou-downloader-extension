@@ -107,12 +107,11 @@ function registerVideos() {
         // Send message with total amount of videos so the interface can interact
         chrome.runtime.sendMessage({totalVideos: totalVideos}, function(response) {});
     }
-    start("first");
+    start();
 }
 
-function start(tryTime) {
+function start() {
 
-    if(tryTime === "first") {
         (() => {
             let index = 0;
 
@@ -192,112 +191,19 @@ function start(tryTime) {
                     }
                 }else {
                     console.log("All video URL's should be saved now.");
-                    startDownloads(true);
+                    startDownloads();
                 }
             }
             prepareDownload();
 
 
         })();
-    }else if(tryTime === "second") {
-        (() => {
-            let index = 0;
-
-            // Empty the URL array
-            videoUrls = [];
-
-            function prepareDownload() {
-                if(index < error.length) {
-
-                    let videoIndex = error[index].index;
-
-                    if(filter(videoIndex) === true) {
-                        chrome.runtime.sendMessage({filtered: true}, function(response) {});
-
-                        console.log("----------------------------");
-                        console.log(`Prepare download for video ${videoIndex} started.`);
-                        $(".work-card-thumbnail").eq(videoIndex).fclick();
-
-                        setTimeout(() => {
-                            if(document.getElementsByClassName("feed-list-item")[0]) {
-                                console.log("getElementsByClassName was successful");
-
-                                // Check if the item is not an image
-                                if(!(document.getElementsByClassName("viewer-container-img").length > 0)) {
-                                    console.log("Item seems to be a video.");
-
-                                    try {
-                                        let videoURL = document.getElementsByTagName("video")[0].currentSrc;
-
-                                        console.log("Executed function to get currentSrc. Src: " + videoURL);
-
-                                        if(videoURL !== "" && videoURL !== undefined) {
-                                            console.log(`Video URL on index ${videoIndex} is: ${videoURL}`);
-                                            $(".close").fclick();
-                                            videoUrls.push({
-                                                index: videoIndex,
-                                                url: videoURL
-                                            });
-                                            chrome.runtime.sendMessage({gotVideoUrl: true}, function(response) {});
-                                        }else {
-                                            console.log(`Could not get the URL for video on index: ${videoIndex}`);
-                                            error.push({
-                                                index: videoIndex,
-                                                description: "Could not get the URL for this video."
-                                            });
-                                        }
-
-                                    }catch (e) {
-                                        error.push({
-                                            index: videoIndex,
-                                            description: e
-                                        });
-                                    }
-                                }else {
-                                    error.push({
-                                        index: videoIndex,
-                                        description: "Item does not seem to be a video."
-                                    });
-                                }
-                            }else {
-                                error.push({
-                                    index: videoIndex,
-                                    description: "Could not get elements by classname."
-                                });
-                                console.log(`Could not elements by classname for video ${videoIndex}. Error saved.`);
-                            }
-
-                            index++;
-
-                            console.log("Total saved video URL's: " + videoUrls.length + " of " + totalVideos);
-                            console.log("Total failed: " + error.length);
-
-                            prepareDownload();
-                        }, 7000);
-
-                    }else {
-                        index++;
-                        prepareDownload();
-
-                        chrome.runtime.sendMessage({filtered: true}, function(response) {});
-                        console.log("The video falls out of timeframe and should not be downloaded.");
-                    }
-                }else {
-                    console.log("All video URL's should be saved now.");
-                    startDownloads(false);
-                }
-            }
-            prepareDownload();
-
-
-        })();
-    }
 
 
 
 }
 
-function startDownloads(retry) {
+function startDownloads() {
     videoUrls.forEach((item, index) => {
         let videoIndex = item.index;
         let videoURL = item.url;
@@ -308,24 +214,6 @@ function startDownloads(retry) {
             console.log(response.message);
         });
     });
-
-    // Retry for the failed videos
-    if (retry) {
-        start("second");
-    }else {
-        console.log("--------------------------------");
-        console.log("--------------------------------");
-        console.log("--------------------------------");
-        console.log("--------------------------------");
-        console.log("Errors:");
-        error.forEach((item, index) => {
-           console.log(`${index} // Video: ${item.index} -> ${item.description}`);
-        });
-        console.log("--------------------------------");
-        console.log("--------------------------------");
-        console.log("--------------------------------");
-        console.log("--------------------------------");
-    }
 }
 
 function filter(index) {
