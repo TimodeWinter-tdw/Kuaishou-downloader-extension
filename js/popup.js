@@ -38,14 +38,14 @@ $(document).ready(function(){
             if(request.filtered === true) {
                 filtered++;
                 curPercentage += 20/videos;
-                $('#bar').css("width", curPercentage + "%");
+                $('#bar').css("width", Math.ceil(curPercentage) + "%");
                 $('#statusMsg').text(`${curPercentage}% // Filtered date for ${foundUrl} out of ${videos}.`);
             }
 
             if (request.gotVideoUrl === true) {
                 foundUrl++;
                 curPercentage += 20/videos;
-                $('#bar').css("width", curPercentage + "%");
+                $('#bar').css("width", Math.ceil(curPercentage) + "%");
                 $('#statusMsg').text(`${curPercentage}% // Found URL for ${foundUrl} out of ${videos}.`);
             }
 
@@ -53,7 +53,7 @@ $(document).ready(function(){
                 downloaded++;
 
                 curPercentage += 40/videos;
-                $('#bar').css("width", curPercentage + "%");
+                $('#bar').css("width", Math.ceil(curPercentage) + "%");
                 $('#statusMsg').text(`${curPercentage}% // Started download for ${downloaded} out of ${videos}.`);
 
                 chrome.downloads.download({
