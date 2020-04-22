@@ -206,10 +206,8 @@ function start(tryTime) {
             // Empty the URL array
             videoUrls = [];
 
-            let length = error.length;
-
             function prepareDownload() {
-                if(index < length) {
+                if(index < error.length) {
 
                     let videoIndex = error[index].index;
 
