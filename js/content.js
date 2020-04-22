@@ -128,7 +128,7 @@ function start() {
                             if(!(document.getElementsByClassName("viewer-container-img").length > 0)) {
                                 console.log("Item seems to be a video.");
 
-                                let videoURL = "https://www.timodw.nl/";
+                                let videoURL = document.getElementsByTagName("video")[0].currentSrc;
                                 console.log("Executed function to get currentSrc. Src: " + videoURL);
 
                                 if(videoURL !== "" && videoURL !== undefined) {
