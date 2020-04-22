@@ -162,7 +162,6 @@ function start() {
                         index++;
 
                         console.log("Total saved video URL's: " + videoUrls.length + " of " + totalVideos);
-                        console.log("----------------------------");
 
                         prepareDownload();
                     }, 5000);
