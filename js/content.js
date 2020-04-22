@@ -181,7 +181,7 @@ function start(tryTime) {
                             console.log("Total failed: " + error.length);
 
                             prepareDownload();
-                        }, 7000);
+                        }, 5000);
 
                     }else {
                         index++;
