@@ -132,6 +132,7 @@ function start() {
 
                             if(videoURL !== "" && videoURL !== undefined) {
                                 console.log(`Video URL on index ${index} is: ${videoURL}`);
+                                $(".close").fclick();
                                 videoUrls.push({
                                     index: index,
                                     url: videoURL
@@ -157,10 +158,12 @@ function start() {
                         console.log(`Could not elements by classname for video ${index}. Error saved.`);
                     }
 
-                    $(".close").fclick();
                     index++;
 
+                    console.log("Total saved video URL's: " + videoUrls.length + " of " + totalVideos);
                     console.log("----------------------------");
+
+                    prepareDownload();
 
                 }else {
                     console.log("The video falls out of timeframe and should not be downloaded.");
@@ -169,9 +172,8 @@ function start() {
                 console.log("All video URL's should be saved now.");
             }
         }
-
-        console.log("Total saved video URL's: " + videoUrls.length + " of " + totalVideos);
         prepareDownload();
+
 
     })();
 
