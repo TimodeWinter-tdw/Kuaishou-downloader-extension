@@ -37,14 +37,14 @@ $(document).ready(function(){
 
             if(request.filtered === true) {
                 filtered++;
-                curPercentage += 30/videos;
+                curPercentage += 20/videos;
                 $('#bar').css("width", curPercentage + "%");
                 $('#statusMsg').text(`${Math.ceil(curPercentage)}% // Found URL for ${foundUrl} out of ${videos}.`);
             }
 
             if (request.gotVideoUrl === true) {
                 foundUrl++;
-                curPercentage += 30/videos;
+                curPercentage += 20/videos;
                 $('#bar').css("width", curPercentage + "%");
                 $('#statusMsg').text(`${Math.ceil(curPercentage)}% // Found URL for ${foundUrl} out of ${videos}.`);
             }
@@ -52,7 +52,7 @@ $(document).ready(function(){
             if (request.download === true) {
                 downloaded++;
 
-                curPercentage += 20/videos;
+                curPercentage += 40/videos;
                 $('#bar').css("width", curPercentage + "%");
                 $('#statusMsg').text(`${Math.ceil(curPercentage)}% // Started download for ${downloaded} out of ${videos}.`);
 
@@ -64,7 +64,7 @@ $(document).ready(function(){
             }
 
 
-    });
+        });
 
     function update() {
         chrome.tabs.executeScript(null, {file:'js/jquery.min.js'});
@@ -76,15 +76,15 @@ $(document).ready(function(){
     // Settings
     let settingsOpen = false;
     $('#settingsBtn').on("click", function() {
-       if (!settingsOpen) {
-           $('#settings').show();
-           $('#settingsBtn').text("Hide settings")
-           settingsOpen = true;
-       }else {
-           $('#settings').hide();
-           $('#settingsBtn').text("Settings");
-           settingsOpen = false;
-       }
+        if (!settingsOpen) {
+            $('#settings').show();
+            $('#settingsBtn').text("Hide settings")
+            settingsOpen = true;
+        }else {
+            $('#settings').hide();
+            $('#settingsBtn').text("Settings");
+            settingsOpen = false;
+        }
     });
 
 });

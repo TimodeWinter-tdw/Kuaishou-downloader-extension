@@ -112,94 +112,92 @@ function registerVideos() {
 
 function start() {
 
-        (() => {
-            let index = 0;
+    (() => {
+        let index = 0;
 
-            function prepareDownload() {
-                if(index < totalVideos) {
+        function prepareDownload() {
+            if(index < totalVideos) {
 
-                    if(filter(index) === true) {
-                        chrome.runtime.sendMessage({filtered: true}, function(response) {});
+                if(filter(index) === true) {
+                    chrome.runtime.sendMessage({filtered: true}, function(response) {});
 
-                        console.log("----------------------------");
-                        console.log(`Prepare download for video ${index} started.`);
-                        $(".work-card-thumbnail").eq(index).fclick();
+                    console.log("----------------------------");
+                    console.log(`Prepare download for video ${index} started.`);
+                    $(".work-card-thumbnail").eq(index).fclick();
 
-                        setTimeout(() => {
-                            if(document.getElementsByClassName("feed-list-item")[0]) {
-                                console.log("getElementsByClassName was successful");
+                    setTimeout(() => {
+                        if(document.getElementsByClassName("feed-list-item")[0]) {
+                            console.log("getElementsByClassName was successful");
 
-                                // Check if the item is not an image
-                                if(!(document.getElementsByClassName("viewer-container-img").length > 0)) {
-                                    console.log("Item seems to be a video.");
+                            // Check if the item is not an image
+                            if(!(document.getElementsByClassName("viewer-container-img").length > 0)) {
+                                console.log("Item seems to be a video.");
 
-                                    try {
-                                        let videoURL = document.getElementsByTagName("video")[0].currentSrc;
+                                try {
+                                    let videoURL = document.getElementsByTagName("video")[0].currentSrc;
 
-                                        console.log("Executed function to get currentSrc. Src: " + videoURL);
+                                    console.log("Executed function to get currentSrc. Src: " + videoURL);
 
-                                        if(videoURL !== "" && videoURL !== undefined) {
-                                            console.log(`Video URL on index ${index} is: ${videoURL}`);
-                                            $(".close").fclick();
-                                            videoUrls.push({
-                                                index: index,
-                                                url: videoURL
-                                            });
-                                            chrome.runtime.sendMessage({gotVideoUrl: true}, function(response) {});
-                                        }else {
-                                            console.log(`Could not get the URL for video on index: ${index}`);
-                                            error.push({
-                                                index: index,
-                                                description: "Could not get the URL for this video."
-                                            });
-                                        }
-
-                                    }catch (e) {
+                                    if(videoURL !== "" && videoURL !== undefined) {
+                                        console.log(`Video URL on index ${index} is: ${videoURL}`);
+                                        $(".close").fclick();
+                                        videoUrls.push({
+                                            index: index,
+                                            url: videoURL
+                                        });
+                                        chrome.runtime.sendMessage({gotVideoUrl: true}, function(response) {});
+                                    }else {
+                                        console.log(`Could not get the URL for video on index: ${index}`);
                                         error.push({
                                             index: index,
-                                            description: e
+                                            description: "Could not get the URL for this video."
                                         });
                                     }
-                                }else {
+
+                                }catch (e) {
                                     error.push({
                                         index: index,
-                                        description: "Item does not seem to be a video."
+                                        description: e
                                     });
                                 }
                             }else {
                                 error.push({
                                     index: index,
-                                    description: "Could not get elements by classname."
+                                    description: "Item does not seem to be a video."
                                 });
-                                console.log(`Could not elements by classname for video ${index}. Error saved.`);
                             }
+                        }else {
+                            error.push({
+                                index: index,
+                                description: "Could not get elements by classname."
+                            });
+                            console.log(`Could not elements by classname for video ${index}. Error saved.`);
+                        }
 
-                            index++;
-
-                            console.log("Total saved video URL's: " + videoUrls.length + " of " + totalVideos);
-                            console.log("Total failed: " + error.length);
-
-                            prepareDownload();
-                        }, 5000);
-
-                    }else {
                         index++;
+
+                        console.log("Total saved video URL's: " + videoUrls.length + " of " + totalVideos);
+                        console.log("Total failed: " + error.length);
+
                         prepareDownload();
+                    }, 10000);
 
-                        chrome.runtime.sendMessage({filtered: true}, function(response) {});
-                        console.log("The video falls out of timeframe and should not be downloaded.");
-                    }
                 }else {
-                    console.log("All video URL's should be saved now.");
-                    startDownloads();
+                    index++;
+                    prepareDownload();
+
+                    chrome.runtime.sendMessage({filtered: true}, function(response) {});
+                    console.log("The video falls out of timeframe and should not be downloaded.");
                 }
+            }else {
+                console.log("All video URL's should be saved now.");
+                startDownloads();
             }
-            prepareDownload();
+        }
+        prepareDownload();
 
 
-        })();
-
-
+    })();
 
 }
 
@@ -213,7 +211,7 @@ function startDownloads() {
         chrome.runtime.sendMessage({download: true, url: videoURL, filename: newFileName}, function(response) {
             console.log(response.message);
         });
-    });
+    })
 }
 
 function filter(index) {
