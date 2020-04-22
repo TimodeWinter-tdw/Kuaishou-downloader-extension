@@ -148,6 +148,7 @@ function start(tryTime) {
                                             });
                                             chrome.runtime.sendMessage({gotVideoUrl: true}, function(response) {});
                                         }else {
+                                            totalVideos--;
                                             console.log(`Could not get the URL for video on index: ${index}`);
                                             error.push({
                                                 index: index,
@@ -156,18 +157,21 @@ function start(tryTime) {
                                         }
 
                                     }catch (e) {
+                                        totalVideos--;
                                         error.push({
                                             index: index,
                                             description: e
                                         });
                                     }
                                 }else {
+                                    totalVideos--;
                                     error.push({
                                         index: index,
                                         description: "Item does not seem to be a video."
                                     });
                                 }
                             }else {
+                                totalVideos--;
                                 error.push({
                                     index: index,
                                     description: "Could not get elements by classname."
