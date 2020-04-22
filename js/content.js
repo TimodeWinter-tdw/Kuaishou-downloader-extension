@@ -91,6 +91,7 @@ function scrollToBottom() {
             setTimeout ( 'scrollToBottom()', 1000 );
         }
     }else {
+        chrome.runtime.sendMessage({scrollingDone: true}, function(response) {});
         registerVideos();
     }
 }
@@ -102,6 +103,9 @@ function registerVideos() {
         videoArray = document.getElementsByClassName('work-card-thumbnail');
         totalVideos = videoArray.length;
         console.log("Total amount of videos: " + totalVideos);
+
+        // Send message with total amount of videos so the interface can interact
+        chrome.runtime.sendMessage({totalVideos: totalVideos}, function(response) {});
     }
     start();
 }
@@ -115,6 +119,7 @@ function start() {
             if(index < totalVideos) {
 
                 if(filter(index) === true) {
+                    chrome.runtime.sendMessage({filtered: true}, function(response) {});
 
                     console.log("----------------------------");
                     console.log(`Prepare download for video ${index} started.`);
@@ -138,6 +143,7 @@ function start() {
                                         index: index,
                                         url: videoURL
                                     });
+                                    chrome.runtime.sendMessage({gotVideoUrl: true}, function(response) {});
                                 }else {
                                     console.log(`Could not get the URL for video on index: ${index}`);
                                     error.push({
@@ -162,15 +168,18 @@ function start() {
                         index++;
 
                         console.log("Total saved video URL's: " + videoUrls.length + " of " + totalVideos);
+                        console.log("Total failed: " + error.length);
 
                         prepareDownload();
                     }, 5000);
 
                 }else {
+                    chrome.runtime.sendMessage({filtered: true}, function(response) {});
                     console.log("The video falls out of timeframe and should not be downloaded.");
                 }
             }else {
                 console.log("All video URL's should be saved now.");
+                startDownloads();
             }
         }
         prepareDownload();
@@ -178,6 +187,19 @@ function start() {
 
     })();
 
+}
+
+function startDownloads() {
+    videoUrls.forEach((item, index) => {
+        let videoIndex = item.index;
+        let videoURL = item.url;
+
+        let newFileName = (videoIndex+1)+"_PusicEntertainment_"+new Date().getTime() + ".mp4";
+
+        chrome.runtime.sendMessage({download: true, url: videoURL, filename: newFileName}, function(response) {
+            console.log(response.message);
+        });
+    })
 }
 
 function filter(index) {
