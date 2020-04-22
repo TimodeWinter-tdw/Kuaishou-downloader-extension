@@ -133,22 +133,31 @@ function start() {
                             if(!(document.getElementsByClassName("viewer-container-img").length > 0)) {
                                 console.log("Item seems to be a video.");
 
-                                let videoURL = document.getElementsByTagName("video")[0].currentSrc;
-                                console.log("Executed function to get currentSrc. Src: " + videoURL);
+                                try {
+                                    let videoURL = document.getElementsByTagName("video")[0].currentSrc;
 
-                                if(videoURL !== "" && videoURL !== undefined) {
-                                    console.log(`Video URL on index ${index} is: ${videoURL}`);
-                                    $(".close").fclick();
-                                    videoUrls.push({
-                                        index: index,
-                                        url: videoURL
-                                    });
-                                    chrome.runtime.sendMessage({gotVideoUrl: true}, function(response) {});
-                                }else {
-                                    console.log(`Could not get the URL for video on index: ${index}`);
+                                    console.log("Executed function to get currentSrc. Src: " + videoURL);
+
+                                    if(videoURL !== "" && videoURL !== undefined) {
+                                        console.log(`Video URL on index ${index} is: ${videoURL}`);
+                                        $(".close").fclick();
+                                        videoUrls.push({
+                                            index: index,
+                                            url: videoURL
+                                        });
+                                        chrome.runtime.sendMessage({gotVideoUrl: true}, function(response) {});
+                                    }else {
+                                        console.log(`Could not get the URL for video on index: ${index}`);
+                                        error.push({
+                                            index: index,
+                                            description: "Could not get the URL for this video."
+                                        });
+                                    }
+
+                                }catch (e) {
                                     error.push({
                                         index: index,
-                                        description: "Could not get the URL for this video."
+                                        description: e
                                     });
                                 }
                             }else {
@@ -171,7 +180,7 @@ function start() {
                         console.log("Total failed: " + error.length);
 
                         prepareDownload();
-                    }, 5000);
+                    }, 10000);
 
                 }else {
                     index++;
