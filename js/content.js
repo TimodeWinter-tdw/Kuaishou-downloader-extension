@@ -106,20 +106,75 @@ function registerVideos() {
     start();
 }
 
-async function start() {
-    // For each video execute the following actions
-    for (let i = 0; i < totalVideos; i++) {
-        console.log("----------------------------");
-        console.log(`Download process for video ${i} started.`);
+function start() {
 
-        // Check if the video should be downloaded or not
-        if(filter(i) === true) {
-            await prepareDownload(i);
-            console.log("Total saved video URL's: " + videoUrls.length + " of " + totalVideos);
-        }else {
-            console.log("The video falls out of timeframe and should not be downloaded.");
+    (() => {
+        let index = 0;
+
+        function prepareDownload() {
+            if(index < totalVideos) {
+
+                if (filter(index) === true) {
+
+                    console.log("----------------------------");
+                    console.log(`Prepare download for video ${index} started.`);
+                    $(".work-card-thumbnail").eq(index).fclick();
+
+                    if (document.getElementsByClassName("feed-list-item")[0]) {
+                        console.log("getElementsByClassName was successful");
+
+                        // Check if the item is not an image
+                        if (!(document.getElementsByClassName("viewer-container-img").length > 0)) {
+                            console.log("Item seems to be a video.");
+
+                            let videoURL = document.getElementsByTagName("video")[0].currentSrc;;
+                            console.log("Executed function to get currentSrc. Src: " + videoURL);
+
+                            if (videoURL !== "" && videoURL !== undefined && videoURL !== null) {
+                                console.log(`Video URL on index ${index} is: ${videoURL}`);
+                                videoUrls.push({
+                                    index: index,
+                                    url: videoURL
+                                });
+                            } else {
+                                console.log(`Could not get the URL for video on index: ${index}`);
+                                error.push({
+                                    index: index,
+                                    description: "Could not get the URL for this video."
+                                });
+                            }
+                        } else {
+                            error.push({
+                                index: index,
+                                description: "Item does not seem to be a video."
+                            });
+                        }
+                    } else {
+                        error.push({
+                            index: index,
+                            description: "Could not get elements by classname."
+                        });
+                        console.log(`Could not elements by classname for video ${index}. Error saved.`);
+                    }
+
+                    $(".close").fclick();
+                    index++;
+
+                    console.log("----------------------------");
+
+                }else {
+                    console.log("The video falls out of timeframe and should not be downloaded.");
+                }
+            }else {
+                console.log("All video URL's should be saved now.");
+            }
         }
-    }
+
+        console.log("Total saved video URL's: " + videoUrls.length + " of " + totalVideos);
+        prepareDownload();
+
+    })();
+
 }
 
 function filter(index) {
@@ -190,51 +245,6 @@ function filter(index) {
             return true;
         }
     }
-}
-
-async function prepareDownload(index) {
-    console.log(`Prepare download for video ${index} started.`);
-    await $(".work-card-thumbnail").eq(index).fclick();
-
-    if (document.getElementsByClassName("feed-list-item")[0]) {
-        console.log("getElementsByClassName was successful");
-
-        // Check if the item is not an image
-        if (!(document.getElementsByClassName("viewer-container-img").length > 0)) {
-            console.log("Item seems to be a video.");
-
-            //todo: Make sure to get url AFTER the click --> Click should have a callback of some sort
-            let videoURL = "https://url.com/";
-            console.log("Executed function to get currentSrc. Src: " + videoURL);
-
-            if (videoURL !== "" && videoURL !== undefined && videoURL !== null) {
-                console.log(`Video URL on index ${index} is: ${videoURL}`);
-                videoUrls.push({
-                    index: index,
-                    url: videoURL
-                });
-            } else {
-                console.log(`Could not get the URL for video on index: ${index}`);
-                error.push({
-                    index: index,
-                    description: "Could not get the URL for this video."
-                });
-            }
-        } else {
-            error.push({
-                index: index,
-                description: "Item does not seem to be a video."
-            });
-        }
-    } else {
-        error.push({
-            index: index,
-            description: "Could not get elements by classname."
-        });
-        console.log(`Could not elements by classname for video ${index}. Error saved.`);
-    }
-
-    $(".close").fclick();
 }
 
 scrollToBottom();
