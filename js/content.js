@@ -192,17 +192,18 @@ function filter(index) {
     }
 }
 
-function prepareDownload(index) {
+async function prepareDownload(index) {
     console.log(`Prepare download for video ${index} started.`);
-    $(".work-card-thumbnail").eq(index).fclick();
+    await $(".work-card-thumbnail").eq(index).fclick();
 
-    if(document.getElementsByClassName("feed-list-item")[0]) {
+    if (document.getElementsByClassName("feed-list-item")[0]) {
         console.log("getElementsByClassName was successful");
 
         // Check if the item is not an image
-        if(!(document.getElementsByClassName("viewer-container-img").length > 0)) {
+        if (!(document.getElementsByClassName("viewer-container-img").length > 0)) {
             console.log("Item seems to be a video.");
 
+            //todo: Make sure to get url AFTER the click --> Click should have a callback of some sort
             let videoURL = "https://url.com/";
             console.log("Executed function to get currentSrc. Src: " + videoURL);
 
@@ -212,20 +213,20 @@ function prepareDownload(index) {
                     index: index,
                     url: videoURL
                 });
-            }else {
+            } else {
                 console.log(`Could not get the URL for video on index: ${index}`);
                 error.push({
                     index: index,
                     description: "Could not get the URL for this video."
                 });
             }
-        }else {
+        } else {
             error.push({
                 index: index,
                 description: "Item does not seem to be a video."
             });
         }
-    }else {
+    } else {
         error.push({
             index: index,
             description: "Could not get elements by classname."
