@@ -106,7 +106,7 @@ function registerVideos() {
     start();
 }
 
-function start() {
+async function start() {
     // For each video execute the following actions
     for (let i = 0; i < totalVideos; i++) {
         console.log("----------------------------");
@@ -114,7 +114,7 @@ function start() {
 
         // Check if the video should be downloaded or not
         if(filter(i) === true) {
-            prepareDownload(i);
+            await prepareDownload(i);
             console.log("Total saved video URL's: " + videoUrls.length + " of " + totalVideos);
         }else {
             console.log("The video falls out of timeframe and should not be downloaded.");
