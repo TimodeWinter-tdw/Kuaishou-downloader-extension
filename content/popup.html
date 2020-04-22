@@ -4,9 +4,7 @@
     <title>Downloader 2.0</title>
     <style>
         body {
-            min-width: 500px;
-            border-radius: 80px;
-            box-shadow: 5px 5px 3px #000000;
+            min-width: 600px;
             background-color: #ffffff;
             font-family: "Segoe UI", "Lucida Grande", Tahoma, sans-serif;
             font-size: 100%;
@@ -32,7 +30,7 @@
         .button {
             width: 90%;
             background: #42A5F5;
-            box-shadow: 5px 5px 3px #000000;
+            box-shadow: 3px 3px 3px rgba(0,0,0,0.30);
             color: #ffffff;
             border-radius: 0;
             border: 0;
@@ -76,31 +74,33 @@
 </head>
 <body>
 
-    <img src="/icons/logo_no_whitespace.png" class="center" alt="Logo" style="width: 80%" />
+    <img src="/icons/logo_no_whitespace.png" class="center" alt="Logo" style="width: 20%; position: relative" />
 
-    <label style="width: 90%">
-        Kuaishou profile URL:
+    <label style="width: 100%">
+        Kuaishou profile URL: &nbsp;&nbsp;&nbsp;
         <input type="text" class="form-control" name="fname" placeholder="Insert profile URL" id="profileUrl">
-    </label>
-    <label style="width: 45%">
+    </label><br />
+
+    <label style="width: 100%">
         Date > From:
         <input type="date" class="form-control" id="dateStart" />
-    </label><br/>
-    <label style="width: 45%">
+    </label>
+
+    <label style="width: 100%">
         Date > End:
         <input type="date" class="form-control" id="dateEnd" />
     </label>
 
-    <button type="button" class="button center" id="downloadBtn">Start download</button>
+    <button type="button" class="button center" style="position: relative" id="downloadBtn">Start download</button>
 
-    <div class="progress" id="progressBar" style="display: none">
+    <div class="progress" id="progressBar" style="display: none; position: relative">
         <div class="bar" id="bar" style="width:0">
             <p class="percent" id="statusMsg"></p>
         </div>
     </div>
 
 
-    <button id="settingsBtn" class="button center">Settings</button>
+    <button id="settingsBtn" class="button center" style="position: relative">Settings</button>
     <div id="settings" style="display: none;">
         <p>To select a folder and disable the save as dialog: settings > search for "Ask where to save each file before
             downloading" > Click on "change" to choose download folder and make sure the switcher is disabled.</p>
