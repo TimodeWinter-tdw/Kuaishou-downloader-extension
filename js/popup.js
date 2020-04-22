@@ -64,7 +64,7 @@ $(document).ready(function(){
             }
 
 
-        });
+    });
 
     function update() {
         chrome.tabs.executeScript(null, {file:'js/jquery.min.js'});
@@ -76,15 +76,15 @@ $(document).ready(function(){
     // Settings
     let settingsOpen = false;
     $('#settingsBtn').on("click", function() {
-        if (!settingsOpen) {
-            $('#settings').show();
-            $('#settingsBtn').text("Hide settings")
-            settingsOpen = true;
-        }else {
-            $('#settings').hide();
-            $('#settingsBtn').text("Settings");
-            settingsOpen = false;
-        }
+       if (!settingsOpen) {
+           $('#settings').show();
+           $('#settingsBtn').text("Hide settings")
+           settingsOpen = true;
+       }else {
+           $('#settings').hide();
+           $('#settingsBtn').text("Settings");
+           settingsOpen = false;
+       }
     });
 
 });
