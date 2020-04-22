@@ -180,7 +180,7 @@ function start() {
                         console.log("Total failed: " + error.length);
 
                         prepareDownload();
-                    }, 10000);
+                    }, 5000);
 
                 }else {
                     index++;
