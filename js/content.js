@@ -174,6 +174,9 @@ function start() {
                     }, 5000);
 
                 }else {
+                    index++;
+                    prepareDownload();
+
                     chrome.runtime.sendMessage({filtered: true}, function(response) {});
                     console.log("The video falls out of timeframe and should not be downloaded.");
                 }
