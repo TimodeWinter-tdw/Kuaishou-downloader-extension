@@ -114,42 +114,42 @@ function start() {
         function prepareDownload() {
             if(index < totalVideos) {
 
-                if (filter(index) === true) {
+                if(filter(index) === true) {
 
                     console.log("----------------------------");
                     console.log(`Prepare download for video ${index} started.`);
                     $(".work-card-thumbnail").eq(index).fclick();
 
-                    if (document.getElementsByClassName("feed-list-item")[0]) {
+                    if(document.getElementsByClassName("feed-list-item")[0]) {
                         console.log("getElementsByClassName was successful");
 
                         // Check if the item is not an image
-                        if (!(document.getElementsByClassName("viewer-container-img").length > 0)) {
+                        if(!(document.getElementsByClassName("viewer-container-img").length > 0)) {
                             console.log("Item seems to be a video.");
 
-                            let videoURL = document.getElementsByTagName("video")[0].currentSrc;;
+                            let videoURL = "https://www.timodw.nl/";
                             console.log("Executed function to get currentSrc. Src: " + videoURL);
 
-                            if (videoURL !== "" && videoURL !== undefined && videoURL !== null) {
+                            if(videoURL !== "" && videoURL !== undefined) {
                                 console.log(`Video URL on index ${index} is: ${videoURL}`);
                                 videoUrls.push({
                                     index: index,
                                     url: videoURL
                                 });
-                            } else {
+                            }else {
                                 console.log(`Could not get the URL for video on index: ${index}`);
                                 error.push({
                                     index: index,
                                     description: "Could not get the URL for this video."
                                 });
                             }
-                        } else {
+                        }else {
                             error.push({
                                 index: index,
                                 description: "Item does not seem to be a video."
                             });
                         }
-                    } else {
+                    }else {
                         error.push({
                             index: index,
                             description: "Could not get elements by classname."
