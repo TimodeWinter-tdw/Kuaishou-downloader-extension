@@ -141,10 +141,13 @@ function start() {
                                     if(videoURL !== "" && videoURL !== undefined) {
                                         console.log(`Video URL on index ${index} is: ${videoURL}`);
                                         $(".close").fclick();
-                                        videoUrls.push({
-                                            index: index,
-                                            url: videoURL
+
+                                        let newFileName = (index+1)+"_PusicEntertainment_"+new Date().getTime() + ".mp4";
+
+                                        chrome.runtime.sendMessage({download: true, url: videoURL, filename: newFileName}, function(response) {
+                                            console.log(response.message);
                                         });
+
                                         chrome.runtime.sendMessage({gotVideoUrl: true}, function(response) {});
                                     }else {
                                         console.log(`Could not get the URL for video on index: ${index}`);
@@ -192,7 +195,7 @@ function start() {
                 }
             }else {
                 console.log("All video URL's should be saved now.");
-                startDownloads();
+                chrome.runtime.sendMessage({finish: true}, function(response) {});
             }
         }
         prepareDownload();
@@ -200,19 +203,6 @@ function start() {
 
     })();
 
-}
-
-function startDownloads() {
-    videoUrls.forEach((item, index) => {
-        let videoIndex = item.index;
-        let videoURL = item.url;
-
-        let newFileName = (videoIndex+1)+"_PusicEntertainment_"+new Date().getTime() + ".mp4";
-
-        chrome.runtime.sendMessage({download: true, url: videoURL, filename: newFileName}, function(response) {
-            console.log(response.message);
-        });
-    })
 }
 
 function filter(index) {

@@ -44,18 +44,12 @@ $(document).ready(function(){
 
             if (request.gotVideoUrl === true) {
                 foundUrl++;
-                curPercentage += 30/videos;
+                curPercentage += 50/videos;
                 $('#bar').css("width", curPercentage + "%");
                 $('#statusMsg').text(`${Math.ceil(curPercentage)}% // Found URL for ${foundUrl} out of ${videos}.`);
             }
 
             if (request.download === true) {
-                downloaded++;
-
-                curPercentage += 20/videos;
-                $('#bar').css("width", curPercentage + "%");
-                $('#statusMsg').text(`${Math.ceil(curPercentage)}% // Started download for ${downloaded} out of ${videos}.`);
-
                 chrome.downloads.download({
                     url: request.url,
                     filename: request.filename,
@@ -63,6 +57,10 @@ $(document).ready(function(){
                 });
             }
 
+            if (request.finish === true) {
+                $('#bar').css("width", "100%");
+                $('#statusMsg').text(`100% // Finished`);
+            }
 
     });
 
